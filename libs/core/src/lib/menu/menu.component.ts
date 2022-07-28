@@ -89,6 +89,10 @@ export class MenuComponent
     @Input()
     id = `fd-menu-${menuUniqueId++}`;
 
+    /** Max height of the menu in pixels. */
+    @Input()
+    maxHeight: Nullable<number>;
+
     /** Emits array of active menu items */
     @Output()
     readonly activePath: EventEmitter<MenuItemComponent[]> = new EventEmitter<MenuItemComponent[]>();

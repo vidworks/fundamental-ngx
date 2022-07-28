@@ -28,6 +28,8 @@ $fd-popover-border-radius: var(--fdPopover_Border_Radius);
     }
 
     &__popper {
+        overflow: hidden;
+
         .fd-list {
             border-radius: $fd-popover-border-radius;
 

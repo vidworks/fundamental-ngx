@@ -70,6 +70,8 @@
 }
 
 .fd-docs--i18n-menu-tooltip {
+    border-top-left-radius: var(--fdPopover_Border_Radius);
+    border-top-right-radius: var(--fdPopover_Border_Radius);
     padding: 0.5rem 0.75rem;
     position: relative;
     height: unset;

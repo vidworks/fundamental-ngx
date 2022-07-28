@@ -11,6 +11,8 @@
         role="menu"
         [class.fd-menu--compact]="_contentDensityObserver.isCompact$ | async"
         [class.fd-menu--mobile]="mobile"
+        [style.max-height.px]="maxHeight"
+        [style.overflow-y]="maxHeight ? 'scroll' : 'inherit'"
     >
         <ul role="none" class="fd-menu__list fd-menu__list--no-shadow">
             <ng-content></ng-content>
