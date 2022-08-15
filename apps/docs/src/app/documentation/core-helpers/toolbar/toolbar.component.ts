@@ -18,6 +18,7 @@ import {
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_GEORGIAN,
     FD_LANGUAGE_ITALIAN,
+    FD_LANGUAGE_PERSIAN,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
@@ -78,6 +79,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         // { name: 'עִברִית', value: FD_LANGUAGE_HEBREW }, TODO: uncomment when translations are provided
         // { name: 'Hindi', value: FD_LANGUAGE_HINDI }, TODO: uncomment when translations are provided
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
+        { name: 'فارسی', value: FD_LANGUAGE_PERSIAN },
         // { name: 'Polski', value: FD_LANGUAGE_POLISH }, TODO: uncomment when translations are provided
         // { name: 'Português', value: FD_LANGUAGE_PORTUGUESE }, TODO: uncomment when translations are provided
         // { name: 'Română', value: FD_LANGUAGE_ROMANIAN }, TODO: uncomment when translations are provided

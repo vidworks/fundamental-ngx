@@ -12,6 +12,7 @@ export * from './german';
 export * from './hebrew';
 export * from './hindi';
 export * from './italian';
+export * from './persian';
 export * from './polish';
 export * from './portuguese';
 export * from './romanian';
