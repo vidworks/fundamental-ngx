@@ -72,6 +72,6 @@ fi
 if [[ $latest == "true" ]]; then
   git stash
   git checkout $MAIN_BRANCH
-  yarn run std-version
+  npx standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat "chore(release): version {{currentTag}} build ${GITHUB_RUN_NUMBER} [ci skip]" --header ""
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $MAIN_BRANCH > /dev/null;
 fi
