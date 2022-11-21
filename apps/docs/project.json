@@ -1,4 +1,5 @@
 {
+    "name": "docs",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
