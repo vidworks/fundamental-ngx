@@ -52,10 +52,9 @@ const routes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(routes, {
-            useHash: true,
-            relativeLinkResolution: 'legacy',
-            preloadingStrategy: PreloadAllModules
-        }),
+    useHash: true,
+    preloadingStrategy: PreloadAllModules
+}),
         MarkdownModule.forRoot({ loader: HttpClient }),
         ThemingModule,
         ContentDensityModule.forRoot({ storage: 'localStorage' }),
