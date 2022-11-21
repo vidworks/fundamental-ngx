@@ -1,245 +1,270 @@
 {
-    "name": "docs",
-    "sourceRoot": "apps/docs/src",
-    "projectType": "application",
-    "prefix": "fundamental-ngx",
-    "generators": {
-        "@nrwl/schematics:component": {
-            "style": "scss"
+  "name": "docs",
+  "sourceRoot": "apps/docs/src",
+  "projectType": "application",
+  "prefix": "fundamental-ngx",
+  "generators": {
+    "@nrwl/schematics:component": {
+      "style": "scss"
+    }
+  },
+  "targets": {
+    "e2e-app": {
+      "executor": "@fundamental-ngx/wdio:e2e-test-app",
+      "configurations": {
+        "affected-local": {
+          "affected": true,
+          "devServerTarget": "docs:serve:e2e",
+          "base": "origin/main",
+          "head": "HEAD"
+        },
+        "all-local": {
+          "affected": false,
+          "devServerTarget": "docs:serve:e2e"
+        },
+        "affected-remote": {
+          "affected": true
+        },
+        "all-remote": {
+          "affected": false
         }
+      },
+      "defaultConfiguration": "affected-local"
     },
-    "targets": {
-        "e2e-app": {
-            "executor": "@fundamental-ngx/wdio:e2e-test-app",
-            "configurations": {
-                "affected-local": {
-                    "affected": true,
-                    "devServerTarget": "docs:serve:e2e",
-                    "base": "origin/main",
-                    "head": "HEAD"
-                },
-                "all-local": {
-                    "affected": false,
-                    "devServerTarget": "docs:serve:e2e"
-                },
-                "affected-remote": {
-                    "affected": true
-                },
-                "all-remote": {
-                    "affected": false
-                }
-            },
-            "defaultConfiguration": "affected-local"
-        },
-        "generate-typedoc": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run core:compile-typedoc",
-                    "npx nx run platform:compile-typedoc",
-                    "npx nx run fn:compile-typedoc",
-                    "npx nx run datetime-adapter:compile-typedoc",
-                    "npx nx run moment-adapter:compile-typedoc",
-                    "npx nx run i18n:compile-typedoc"
-                ],
-                "parallel": true
-            }
-        },
-        "build": {
-            "executor": "@nrwl/angular:webpack-browser",
-            "options": {
-                "outputPath": "dist/apps/docs",
-                "index": "apps/docs/src/index.html",
-                "main": "apps/docs/src/main.ts",
-                "polyfills": "apps/docs/src/polyfills.ts",
-                "tsConfig": "apps/docs/tsconfig.app.json",
-                "assets": [
-                    "apps/docs/src/favicon.ico",
-                    "apps/docs/src/assets",
-                    {
-                        "glob": "**/css_variables.css",
-                        "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-                        "output": "./assets/theming-base/"
-                    },
-                    {
-                        "input": ".",
-                        "glob": "README.md",
-                        "output": "./assets"
-                    },
-                    {
-                        "input": "./libs/docs/shared",
-                        "glob": "NEW_COMPONENT.md",
-                        "output": "./assets"
-                    },
-                    {
-                        "input": "./libs/platform/src/lib",
-                        "glob": "README.md",
-                        "output": "./assets/platform"
-                    },
-                    {
-                        "input": "./libs/cx/src/lib",
-                        "glob": "README.md",
-                        "output": "./assets/cx"
-                    },
-                    {
-                        "input": "./libs/core/src/lib",
-                        "glob": "README.md",
-                        "output": "./assets/core"
-                    },
-                    {
-                        "input": "./libs/fn/src/lib",
-                        "glob": "README.md",
-                        "output": "./assets/fn"
-                    },
-                    {
-                        "input": "./libs/docs/typedoc",
-                        "glob": "**/*",
-                        "output": "./assets/typedoc"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "./node_modules/fundamental-styles/dist/theming/",
-                        "output": "./assets/fundamental-styles-theming/"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "./node_modules/highlight.js/styles/",
-                        "output": "./assets/highlight-js-styles/"
-                    },
-                    {
-                        "glob": "**/examples/**/*",
-                        "input": "libs/docs/shared",
-                        "output": "./docs/shared"
-                    },
-                    {
-                        "glob": "**/examples/**/*",
-                        "input": "libs/docs/core",
-                        "output": "./docs/core"
-                    },
-                    {
-                        "glob": "**/examples/**/*",
-                        "input": "libs/docs/platform",
-                        "output": "./docs/platform"
-                    },
-                    {
-                        "glob": "**/examples/**/*",
-                        "input": "libs/docs/fn",
-                        "output": "./docs/fn"
-                    },
-                    {
-                        "glob": "sort.pipe.ts",
-                        "input": "libs/docs/shared/src/lib/core-helpers/pipes",
-                        "output": "./docs/core/shared/examples"
-                    },
-                    {
-                        "glob": "filter.pipe.ts",
-                        "input": "libs/docs/shared/src/lib/core-helpers/pipes",
-                        "output": "./docs/core/shared/examples"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "libs/docs/shared/src/lib/i18n/examples",
-                        "output": "./docs/platform/i18n/examples"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "libs/docs/shared/src/lib/core-helpers/stackblitz/code-example-stack",
-                        "output": "./stackblitz/example-stack"
-                    }
-                ],
-                "styles": [
-                    "node_modules/fundamental-styles/dist/icon.css",
-                    "apps/docs/src/fd-typedoc/assets/css/main.scss",
-                    "apps/docs/src/styles.scss",
-                    {
-                        "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
-                        "inject": false,
-                        "bundleName": "sap_fiori_3_fonts"
-                    },
-                    {
-                        "input": "apps/docs/src/theming/sap_horizon_fonts.css",
-                        "inject": false,
-                        "bundleName": "sap_horizon_fonts"
-                    }
-                ],
-                "scripts": ["node_modules/marked/lib/marked.js"],
-                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
-                "vendorChunk": true,
-                "extractLicenses": false,
-                "buildOptimizer": false,
-                "sourceMap": true,
-                "optimization": false,
-                "namedChunks": true,
-                "customWebpackConfig": {
-                    "path": "./webpack.config.js"
-                }
-            },
-            "configurations": {
-                "production": {
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "namedChunks": false,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true,
-                    "budgets": [
-                        {
-                            "type": "initial",
-                            "maximumWarning": "2mb",
-                            "maximumError": "5mb"
-                        }
-                    ]
-                },
-                "production-unoptimized": {
-                    "tsConfig": "apps/docs/tsconfig.netlify.json",
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ],
-                    "sourceMap": false,
-                    "namedChunks": false,
-                    "vendorChunk": false
-                }
-            },
-            "outputs": ["{options.outputPath}"],
-            "defaultConfiguration": "",
-            "dependsOn": ["^build", "generate-typedoc"]
-        },
-        "serve": {
-            "executor": "@nrwl/angular:webpack-server",
-            "options": {
-                "browserTarget": "docs:build"
-            },
-            "configurations": {
-                "production": {
-                    "browserTarget": "docs:build:production"
-                },
-                "hot-module-replacement": {
-                    "hmr": true
-                },
-                "e2e": {
-                    "watch": false,
-                    "disableHostCheck": true,
-                    "liveReload": false
-                }
-            }
-        },
-        "lint": {
-            "executor": "@nrwl/linter:eslint",
-            "options": {
-                "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
-            }
+    "generate-typedoc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run core:compile-typedoc",
+          "npx nx run platform:compile-typedoc",
+          "npx nx run fn:compile-typedoc",
+          "npx nx run datetime-adapter:compile-typedoc",
+          "npx nx run moment-adapter:compile-typedoc",
+          "npx nx run i18n:compile-typedoc"
+        ],
+        "parallel": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "options": {
+        "outputPath": "dist/apps/docs",
+        "index": "apps/docs/src/index.html",
+        "main": "apps/docs/src/main.ts",
+        "polyfills": "apps/docs/src/polyfills.ts",
+        "tsConfig": "apps/docs/tsconfig.app.json",
+        "assets": [
+          "apps/docs/src/favicon.ico",
+          "apps/docs/src/assets",
+          {
+            "glob": "**/css_variables.css",
+            "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
+            "output": "./assets/theming-base/"
+          },
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "./assets"
+          },
+          {
+            "input": "./libs/docs/shared",
+            "glob": "NEW_COMPONENT.md",
+            "output": "./assets"
+          },
+          {
+            "input": "./libs/platform/src/lib",
+            "glob": "README.md",
+            "output": "./assets/platform"
+          },
+          {
+            "input": "./libs/cx/src/lib",
+            "glob": "README.md",
+            "output": "./assets/cx"
+          },
+          {
+            "input": "./libs/core/src/lib",
+            "glob": "README.md",
+            "output": "./assets/core"
+          },
+          {
+            "input": "./libs/fn/src/lib",
+            "glob": "README.md",
+            "output": "./assets/fn"
+          },
+          {
+            "input": "./libs/docs/typedoc",
+            "glob": "**/*",
+            "output": "./assets/typedoc"
+          },
+          {
+            "glob": "**/*",
+            "input": "./node_modules/fundamental-styles/dist/theming/",
+            "output": "./assets/fundamental-styles-theming/"
+          },
+          {
+            "glob": "**/*",
+            "input": "./node_modules/highlight.js/styles/",
+            "output": "./assets/highlight-js-styles/"
+          },
+          {
+            "glob": "**/examples/**/*",
+            "input": "libs/docs/shared",
+            "output": "./docs/shared"
+          },
+          {
+            "glob": "**/examples/**/*",
+            "input": "libs/docs/core",
+            "output": "./docs/core"
+          },
+          {
+            "glob": "**/examples/**/*",
+            "input": "libs/docs/platform",
+            "output": "./docs/platform"
+          },
+          {
+            "glob": "**/examples/**/*",
+            "input": "libs/docs/fn",
+            "output": "./docs/fn"
+          },
+          {
+            "glob": "sort.pipe.ts",
+            "input": "libs/docs/shared/src/lib/core-helpers/pipes",
+            "output": "./docs/core/shared/examples"
+          },
+          {
+            "glob": "filter.pipe.ts",
+            "input": "libs/docs/shared/src/lib/core-helpers/pipes",
+            "output": "./docs/core/shared/examples"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/docs/shared/src/lib/i18n/examples",
+            "output": "./docs/platform/i18n/examples"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/docs/shared/src/lib/core-helpers/stackblitz/code-example-stack",
+            "output": "./stackblitz/example-stack"
+          }
+        ],
+        "styles": [
+          "node_modules/fundamental-styles/dist/icon.css",
+          "apps/docs/src/fd-typedoc/assets/css/main.scss",
+          "apps/docs/src/styles.scss",
+          {
+            "input": "apps/docs/src/theming/sap_fiori_3_fonts.css",
+            "inject": false,
+            "bundleName": "sap_fiori_3_fonts"
+          },
+          {
+            "input": "apps/docs/src/theming/sap_horizon_fonts.css",
+            "inject": false,
+            "bundleName": "sap_horizon_fonts"
+          }
+        ],
+        "scripts": [
+          "node_modules/marked/lib/marked.js"
+        ],
+        "allowedCommonJsDependencies": [
+          "moment",
+          "highlight.js",
+          "focus-trap",
+          "@angularclass/hmr"
+        ],
+        "vendorChunk": true,
+        "extractLicenses": false,
+        "buildOptimizer": false,
+        "sourceMap": true,
+        "optimization": false,
+        "namedChunks": true,
+        "customWebpackConfig": {
+          "path": "./webpack.config.js"
         }
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/docs/src/environments/environment.ts",
+              "with": "apps/docs/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        },
+        "production-unoptimized": {
+          "tsConfig": "apps/docs/tsconfig.netlify.json",
+          "fileReplacements": [
+            {
+              "replace": "apps/docs/src/environments/environment.ts",
+              "with": "apps/docs/src/environments/environment.prod.ts"
+            }
+          ],
+          "sourceMap": false,
+          "namedChunks": false,
+          "vendorChunk": false
+        }
+      },
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "",
+      "dependsOn": [
+        "^build",
+        "generate-typedoc"
+      ]
     },
-    "tags": ["scope:docs", "type:app"],
-    "implicitDependencies": ["core", "platform", "fn", "i18n", "datetime-adapter", "moment-adapter"]
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "options": {
+        "browserTarget": "docs:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "docs:build:production"
+        },
+        "hot-module-replacement": {
+          "hmr": true
+        },
+        "e2e": {
+          "watch": false,
+          "disableHostCheck": true,
+          "liveReload": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/docs/**/*.ts",
+          "apps/docs/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "scope:docs",
+    "type:app"
+  ],
+  "implicitDependencies": [
+    "core",
+    "platform",
+    "fn",
+    "i18n",
+    "datetime-adapter",
+    "moment-adapter"
+  ]
 }
