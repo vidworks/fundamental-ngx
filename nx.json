@@ -66,11 +66,19 @@
         },
         "prepare": {
             "dependsOn": ["build-umbrella"]
+        },
+        "test": {
+            "inputs": ["default", "^production", "{workspaceRoot}/karma.conf.js"]
         }
     },
     "namedInputs": {
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
         "sharedGlobals": ["{workspaceRoot}/angular.json", "{workspaceRoot}/tsconfig.json", "{workspaceRoot}/nx.json"],
-        "production": ["default"]
+        "production": [
+            "default",
+            "!{projectRoot}/**/*.spec.[jt]s",
+            "!{projectRoot}/tsconfig.spec.json",
+            "!{projectRoot}/karma.conf.js"
+        ]
     }
 }
