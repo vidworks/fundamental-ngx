@@ -43,10 +43,6 @@ export class StackblitzService {
                 'src/polyfills.ts': await this.polyfills,
                 'src/styles.scss': await this.styles,
                 'angular.json': await this.angular,
-                /**
-                 * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
-                 * https://github.com/stackblitz/core/issues/1364
-                 */
                 'tsconfig.json': await this.tsconfig
             },
             title: 'Fundamental-NGX Example',
