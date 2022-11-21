@@ -17,7 +17,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { RouterLink, RouterLinkWithHref } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { ContentObserver } from '@angular/cdk/observers';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
@@ -35,11 +35,11 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
         {
             provide: 'linkRouterTarget',
             useFactory: (
-                withHref?: RouterLinkWithHref,
+                withHref?: RouterLink,
                 routerLink?: RouterLink
-            ): RouterLinkWithHref | RouterLink | undefined => withHref || routerLink,
+            ): RouterLink | RouterLink | undefined => withHref || routerLink,
             deps: [
-                [new Optional(), new Self(), RouterLinkWithHref],
+                [new Optional(), new Self(), RouterLink],
                 [new Optional(), new Self(), RouterLink]
             ]
         }
@@ -97,7 +97,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         private _elementRef: ElementRef<Element>,
         private contentObserver: ContentObserver,
         private changeDetectorRef: ChangeDetectorRef,
-        @Inject('linkRouterTarget') readonly routerLink: RouterLinkWithHref | RouterLink
+        @Inject('linkRouterTarget') readonly routerLink: RouterLink | RouterLink
     ) {
         if (isDevMode() && this.elementRef().nativeElement.hasAttribute('fd-breadcrumb-link')) {
             console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
