@@ -1,0 +1,12 @@
+<fd-docs-section-title id="simple" componentName="FdkClicked">Basic example</fd-docs-section-title>
+<description>
+    <p>
+        Just import and inject <code>ResizeObserverService</code> in your component, then call
+        <code>observe</code> method with element or <code>ElementRef</code> as a parameter. <code>observe</code> method
+        returns <code>Observable</code> which emits <code>ResizeObserverEntry</code> on every resize event.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fd-resize-observer-service-usage-example></fd-resize-observer-service-usage-example>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>

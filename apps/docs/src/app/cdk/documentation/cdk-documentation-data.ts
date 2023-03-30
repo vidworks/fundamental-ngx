@@ -46,6 +46,10 @@ export const utilities: SectionInterfaceContent[] = [
     {
         url: 'cdk/tabbable',
         name: 'Tabbable element'
+    },
+    {
+        url: 'cdk/utils/resize-observer',
+        name: 'Resize Observer'
     }
 ];
 

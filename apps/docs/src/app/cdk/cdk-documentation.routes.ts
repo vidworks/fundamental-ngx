@@ -60,6 +60,11 @@ export const ROUTES: Routes = [
                 path: 'initial-focus',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/initial-focus').then((m) => m.InitialFocusDocsModule)
+            },
+            {
+                path: 'utils/resize-observer',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/resize-observer').then((m) => m.ResizeObserverDocsModule)
             }
         ]
     }

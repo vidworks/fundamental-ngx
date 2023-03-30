@@ -1,0 +1,17 @@
+<header>Resize observer service</header>
+<description>
+    <p>
+        Resize observer service allows you to subscribe to resize events of an element. It is based on
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver" target="_blank">ResizeObserver</a>
+        API. It is supported in all modern browsers, except IE.
+    </p>
+    <p>
+        Why do we need this service? The <code>ResizeObserverService</code> will manage your observations on the various
+        elements and will ensure that you always have one listener per element and also it gives you RxJS Observable to
+        subscribe to.
+    </p>
+</description>
+<import module="ResizeObserverService" subPackage="utils"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

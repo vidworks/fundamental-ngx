@@ -118,6 +118,7 @@
         "docs-cdk-initial-focus": "libs/docs/cdk/initial-focus",
         "docs-cdk-selectable-list": "libs/docs/cdk/selectable-list",
         "docs-cdk-tabbable": "libs/docs/cdk/tabbable",
+        "docs-cdk-utils-resize-observer": "libs/docs/cdk/utils/resize-observer",
         "docs-core-action-bar": "libs/docs/core/action-bar",
         "docs-core-action-sheet": "libs/docs/core/action-sheet",
         "docs-core-alert": "libs/docs/core/alert",
