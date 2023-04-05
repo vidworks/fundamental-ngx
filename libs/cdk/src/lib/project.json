@@ -45,5 +45,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "tags": ["type:lib", "scope:fdk"]
 }

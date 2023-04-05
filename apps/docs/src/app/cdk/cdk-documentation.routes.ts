@@ -64,6 +64,13 @@ export const ROUTES: Routes = [
                 path: 'initial-focus',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/cdk/initial-focus').then((m) => m.InitialFocusDocsModule)
+            },
+            {
+                path: 'intersection-observer',
+                loadChildren: () =>
+                    import('@fundamental-ngx/docs/cdk/intersection-observer').then(
+                        (m) => m.IntersectionObserverDocsModule
+                    )
             }
         ]
     }

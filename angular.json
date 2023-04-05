@@ -117,6 +117,7 @@
         "docs-cdk-focusable-list": "libs/docs/cdk/focusable-list",
         "docs-cdk-forms": "libs/docs/cdk/forms",
         "docs-cdk-initial-focus": "libs/docs/cdk/initial-focus",
+        "docs-cdk-intersection-observer": "libs/docs/cdk/intersection-observer",
         "docs-cdk-selectable-list": "libs/docs/cdk/selectable-list",
         "docs-cdk-tabbable": "libs/docs/cdk/tabbable",
         "docs-core-action-bar": "libs/docs/core/action-bar",

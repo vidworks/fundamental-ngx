@@ -8,3 +8,4 @@ export * from './rtl.service';
 export * from './tabbable-element.service';
 export * from './themes.service';
 export * from './observers/attribute.observer';
+export * from './observers/intersection-observer.service';

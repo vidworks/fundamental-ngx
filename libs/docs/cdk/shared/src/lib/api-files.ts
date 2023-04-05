@@ -11,5 +11,6 @@ export const API_FILES = {
     utils: ['UtilsComponent'],
     focusableItem: ['FocusableItemComponent'],
     tabbable: [''],
-    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective']
+    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective'],
+    intersectionObserver: []
 };

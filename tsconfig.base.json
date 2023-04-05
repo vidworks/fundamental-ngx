@@ -142,6 +142,7 @@
             "@fundamental-ngx/docs/cdk/focusable-list": ["libs/docs/cdk/focusable-list/index.ts"],
             "@fundamental-ngx/docs/cdk/forms": ["libs/docs/cdk/forms/index.ts"],
             "@fundamental-ngx/docs/cdk/initial-focus": ["libs/docs/cdk/initial-focus/index.ts"],
+            "@fundamental-ngx/docs/cdk/intersection-observer": ["libs/docs/cdk/intersection-observer/index.ts"],
             "@fundamental-ngx/docs/cdk/selectable-list": ["libs/docs/cdk/selectable-list/index.ts"],
             "@fundamental-ngx/docs/cdk/shared": ["libs/docs/cdk/shared/src"],
             "@fundamental-ngx/docs/cdk/tabbable": ["libs/docs/cdk/tabbable/index.ts"],
