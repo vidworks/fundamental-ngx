@@ -12,6 +12,7 @@ import {
     OnInit,
     Optional,
     Output,
+    Renderer2,
     TemplateRef,
     ViewChild
 } from '@angular/core';
@@ -386,7 +387,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
         protected _listConfig: ListConfig,
-        @Optional() private readonly _list: ListComponent<any>
+        @Optional() private readonly _list: ListComponent<any>,
+        protected _renderer: Renderer2
     ) {
         super(_changeDetectorRef);
     }
@@ -602,6 +604,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     /** @hidden */
     _isAdvancedText(text: ListDescription): text is ListAdvancedDescription {
         return typeof text !== 'string' && !!text.text;
+    }
+
+    /** @hidden */
+    protected _removeWrappingElement(): void {
+        const el = this.itemEl.nativeElement;
+        const parent = this._renderer.parentNode(this.itemEl.nativeElement);
+        this._renderer.removeChild(parent, el, true);
+        while (el.firstChild) {
+            this._renderer.appendChild(parent, el.firstChild);
+        }
     }
 
     /** @hidden */

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { BaseListItem } from './base-list-item';
 
 let nextListGrpHeaderId = 0;
@@ -11,7 +11,7 @@ let nextListGrpHeaderId = 0;
     </li>`,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }]
 })
-export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
+export class ListGroupHeaderComponent extends BaseListItem implements OnInit, AfterViewInit {
     /** Displays list group header title */
     @Input()
     groupHeaderTitle?: string;
@@ -28,5 +28,11 @@ export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
      */
     ngOnInit(): void {
         this.id = `fdp-list-${nextListGrpHeaderId++}`;
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        super.ngAfterViewInit();
+        this._removeWrappingElement();
     }
 }

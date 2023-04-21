@@ -7,7 +7,7 @@ export class ListPo extends PlatformBaseComponentPo {
     noBorderListItems = 'fdp-platform-list-border-less-example li';
     noBorderCompactList = 'fdp-platform-list-border-less-example #compact-list';
     // footer examples
-    footerListItems = 'fdp-platform-list-with-footer-example fdp-standard-list-item li';
+    footerListItems = 'fdp-platform-list-with-footer-example li';
     footerCompactList = 'fdp-platform-list-with-footer-example fdp-list[fdCompact]';
     footer = 'fdp-platform-list-with-footer-example fdp-list-footer li';
     // group header examples
@@ -15,7 +15,7 @@ export class ListPo extends PlatformBaseComponentPo {
     groupHeader = 'fdp-platform-list-with-group-header-example fdp-list-group-header li';
     groupCompactList = 'fdp-platform-list-with-group-header-example fdp-list[fdCompact]';
     // interactive examples
-    interactiveListItems = 'fdp-platform-list-with-group-header fdp-standard-list-item li';
+    interactiveListItems = 'fdp-platform-list-with-group-header li';
     // counter examples
     counterListItems = 'fdp-platform-list-with-item-counter-example li';
     counterCompactList = 'fdp-platform-list-with-item-counter-example fdp-list[fdCompact]';
@@ -30,7 +30,7 @@ export class ListPo extends PlatformBaseComponentPo {
     multiListItems = 'fdp-platform-list-with-selection-example li';
     multiToolbar = 'fdp-platform-list-with-selection-example fd-toolbar';
     multiCheckbox = 'fdp-platform-list-with-selection-example fd-checkbox';
-    multiCheckBoxMark = 'fdp-platform-list-with-selection-example fdp-standard-list-item li';
+    multiCheckBoxMark = 'fdp-platform-list-with-selection-example li';
     // single selection examples
     singleList = 'fdp-platform-list-with-single-selection-example fdp-list ul';
     singleListItems = 'fdp-platform-list-with-single-selection-example li';
@@ -42,7 +42,7 @@ export class ListPo extends PlatformBaseComponentPo {
     navListItems = 'fdp-platform-list-with-navigation-example li';
     navListLink = 'fdp-platform-list-with-navigation-example a';
     // virtual scroll examples:
-    vScrollListItems = 'fdp-platform-list-with-infinite-scroll-example fdp-standard-list-item li';
+    vScrollListItems = 'fdp-platform-list-with-infinite-scroll-example li';
     vScrollLoadIcon = 'fd-busy-indicator .fd-busy-indicator';
     busyIndicator = '.fd-busy-indicator';
     // load on btn click examples

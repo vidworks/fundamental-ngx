@@ -21,7 +21,7 @@ export class MultiInputPo extends PlatformBaseComponentPo {
     approveButton = '[fdtype="emphasized"]';
     groupHeader = '.fd-list__group-header';
     groupDropdown = '#fdp-id-grouped button';
-    options = 'fdp-standard-list-item .fd-list__title';
+    options = '.fd-list__title';
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = "span[role='button']";
     dropdownOptionText = this.dropdownOptions + 'span';
@@ -38,9 +38,7 @@ export class MultiInputPo extends PlatformBaseComponentPo {
     selectedDropDownOption = (name: string): string => `//span[text()='${name}']`;
 
     dropDownOption = async (name: string): Promise<string> =>
-        (await doesItExist('fdp-standard-list-item .fd-list__content'))
-            ? `//div[@title="${name}"]/../..`
-            : `//span[@title="${name}"]/..`;
+        (await doesItExist('.fd-list__content')) ? `//div[@title="${name}"]/../..` : `//span[@title="${name}"]/..`;
 
     async expandDropdown(dropDownSelector: string, index: number = 0, usePause = false): Promise<void> {
         await sendKeys(['Escape']);

@@ -55,20 +55,6 @@ fd-popover-body {
             border-radius: inherit;
         }
 
-        .fd-list {
-            border-radius: $fd-popover-border-radius;
-
-            &__item {
-                &:first-child {
-                    @include set-list-border-radius(top);
-                }
-
-                &:last-child {
-                    @include set-list-border-radius(bottom);
-                }
-            }
-        }
-
         .fd-nested-list {
             border-bottom: none;
 
