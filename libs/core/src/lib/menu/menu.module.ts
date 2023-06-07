@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
 import { MenuTitleDirective } from './directives/menu-title.directive';
 import { MenuInteractiveDirective } from './directives/menu-interactive.directive';
-import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
+import { MenuSeparatorDirective } from './menu-separator.directive';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
@@ -21,7 +21,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuComponent,
         MenuItemComponent,
         MenuAddonDirective,
-        MenuSeparatorComponent,
+        MenuSeparatorDirective,
         MenuShortcutDirective,
         MenuInteractiveDirective,
         MenuTitleDirective,
@@ -33,7 +33,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuComponent,
         MenuItemComponent,
         SubmenuComponent,
-        MenuSeparatorComponent,
+        MenuSeparatorDirective,
         MenuShortcutDirective,
         MenuInteractiveDirective,
         MenuTitleDirective,
