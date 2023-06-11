@@ -10,14 +10,20 @@ import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.compo
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
-import { IconModule } from '@fundamental-ngx/core/icon';
 import { DynamicComponentService, InitialFocusModule } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedMenuCompactDirective } from './directives/deprecated-menu-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { GlyphMenuAddonDirective } from './directives/glyph-menu-addon.directive';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, IconModule, InitialFocusModule, ContentDensityModule],
-    declarations: [
+    imports: [
+        CommonModule,
+        PopoverModule,
+        InitialFocusModule,
+        ContentDensityModule,
+        GlyphMenuAddonDirective,
+        PortalModule,
         MenuComponent,
         MenuItemComponent,
         MenuAddonDirective,
@@ -40,7 +46,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuAddonDirective,
         MenuTriggerDirective,
         DeprecatedMenuCompactDirective,
-        ContentDensityModule
+        ContentDensityModule,
+        GlyphMenuAddonDirective
     ],
     providers: [DynamicComponentService]
 })
