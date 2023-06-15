@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 })
 export class MenuExampleComponent {
     menuItemValue: boolean;
+    sortOrder: 'asc' | 'desc' = 'asc';
 
     valueChanged(value: boolean): void {
         this.menuItemValue = value;
