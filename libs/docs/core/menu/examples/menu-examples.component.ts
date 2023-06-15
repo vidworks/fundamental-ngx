@@ -4,14 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-menu-example',
     templateUrl: './menu-example.component.html'
 })
-export class MenuExampleComponent {
-    menuItemValue: boolean;
-    sortOrder: 'asc' | 'desc' = 'asc';
-
-    valueChanged(value: boolean): void {
-        this.menuItemValue = value;
-    }
-}
+export class MenuExampleComponent {}
 
 @Component({
     selector: 'fd-menu-addon-example',
