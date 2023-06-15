@@ -6,3 +6,4 @@ export * from './collection-page.interface';
 export * from './collection-sort.interface';
 export * from './selection-value.interface';
 export * from './column-responsive-state.interface';
+export * from './table-item.interface';

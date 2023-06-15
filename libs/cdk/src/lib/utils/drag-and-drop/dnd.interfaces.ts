@@ -36,6 +36,7 @@ export interface DndItem {
     released: Observable<void>;
     started: Observable<void>;
     listDraggable: boolean;
+    index: number;
     changeCDKDragState(): void;
     setDisabledState(state: boolean): void;
 }

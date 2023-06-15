@@ -32,8 +32,9 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
 
     /** Scroll events stream */
     private _elementScrollStream: Observable<Event> = new Observable((observer: Observer<Event>) => {
+        const elm = this.elementRef.nativeElement;
         const subscription = this.ngZone.runOutsideAngular(() =>
-            fromEvent(this.elementRef.nativeElement, 'scroll').subscribe(observer)
+            fromEvent(elm, 'scroll').subscribe(observer)
         );
         return () => subscription.unsubscribe();
     }).pipe(

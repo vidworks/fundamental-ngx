@@ -1,9 +1,16 @@
 <fdp-table
     [dataSource]="source"
     [pageScrolling]="true"
+    [isTreeTable]="true"
     [pageSize]="50"
     bodyHeight="20rem"
+    dropMode='auto'
     [loading]="!!(loading | async)"
+    relationKey="children"
+    emptyTableMessage="No data found"
+    (rowSelectionChange)="onRowSelectionChange($event)"
+    (rowToggleOpenState)="onRowToggleOpenState($event)"
+    (rowsRearrange)="onRowsRearrange($event)"
 >
     <fdp-table-toolbar title="Order Items"> </fdp-table-toolbar>
 

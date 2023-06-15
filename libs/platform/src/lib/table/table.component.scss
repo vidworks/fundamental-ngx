@@ -540,3 +540,8 @@ fdk-dynamic-portal {
     }
     // End TODO
 }
+
+.fdp-table__scroll-spy {
+    position: relative;
+    top: -200px;
+}

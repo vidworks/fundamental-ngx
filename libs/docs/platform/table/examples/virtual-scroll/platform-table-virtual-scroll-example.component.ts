@@ -5,10 +5,11 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
 import {
     TableDataSource,
     TableDataProvider,
-    TableState,
-    TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
+    TableState
 } from '@fundamental-ngx/platform/table';
+import { TableItem } from '../../../../../platform/src/lib/table/interfaces';
+
+let index = 0;
 
 @Component({
     selector: 'fdp-platform-table-virtual-scroll-example',
@@ -24,7 +25,7 @@ export class PlatformTableVirtualScrollExampleComponent {
     }
 }
 
-export interface ExampleItem {
+export interface ExampleItem extends TableItem<ExampleItem, 'children'> {
     name: string;
     description?: string;
     price?: {
@@ -35,7 +36,6 @@ export interface ExampleItem {
     statusColor?: string;
     date?: FdDate;
     verified?: boolean;
-    children?: ExampleItem[];
 }
 
 /**
@@ -43,45 +43,27 @@ export interface ExampleItem {
  *
  */
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
-    totalItems = ITEMS.length;
+    items: ExampleItem[] = [];
+    totalItems = 5000;
+    startIndex = 0;
+
+    constructor(public level = 0) {
+        super();
+    }
 
     fetch(tableState?: TableState): Observable<ExampleItem[]> {
-        this.items = [...ITEMS];
+        this.items = generateItems(10, this.level);
 
-        this.totalItems = this.items.length;
+        this.startIndex = this.items.length;
 
         return of(this.items);
     }
 }
 
-// Example items
-const ITEMS: ExampleItem[] = new Array(5000).fill(null).map((_, index) => ({
-    name: 'Laptops ' + index,
-    children: [
-        {
-            name: 'Astro Laptop 1516',
-            description: 'pede malesuada',
-            price: {
-                value: 489.01,
-                currency: 'EUR'
-            },
-            status: 'Out of stock',
-            statusColor: 'negative',
-            date: new FdDate(2020, 2, 5),
-            verified: true
-        },
-        {
-            name: 'Benda Laptop 1408',
-            description: 'suspendisse potenti cras in',
-            price: {
-                value: 243.49,
-                currency: 'CNY'
-            },
-            status: 'Stocked on demand',
-            statusColor: 'informative',
-            date: new FdDate(2020, 9, 22),
-            verified: true
-        }
-    ]
-}));
+function generateItems(size = 100, level = 0): ExampleItem[] {
+    return new Array(size).fill(null).map(() => ({
+        name: 'Laptops ' + index++,
+        children: level === 0 ? new TableDataSource(new TableDataProviderExample(level + 1)) : []
+    }))
+}
+

@@ -6,7 +6,10 @@
     emptyTableMessage="No data found"
     bodyHeight="300px"
     [virtualScroll]="true"
-    [expandOnInit]="true"
+    [expandOnInit]="false"
+    [pageScrolling]="true"
+    [pageScrollingThreshold]="100"
+    [pageSize]="100"
 >
     <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
 
