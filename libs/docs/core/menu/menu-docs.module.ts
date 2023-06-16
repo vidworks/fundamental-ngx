@@ -15,6 +15,8 @@ import { DeprecatedMenuCompactDirective, MenuModule } from '@fundamental-ngx/cor
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { ExtendedMenuExampleComponent } from './examples/extended-menu-example.component';
+import { FormControlModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -28,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MenuModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MenuModule, FormControlModule],
     exports: [RouterModule],
     declarations: [
         MenuDocsComponent,
@@ -38,7 +40,8 @@ const routes: Routes = [
         MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
         MenuWithSubmenuExampleComponent,
-        MenuScrollbarExampleComponent
+        MenuScrollbarExampleComponent,
+        ExtendedMenuExampleComponent
     ],
     providers: [moduleDeprecationsProvider(DeprecatedMenuCompactDirective), currentComponentProvider('menu')]
 })

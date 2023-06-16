@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ExampleFile, getAsset, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 const menuHtml = 'menu-example.component.html';
 const menuAddonHtml = 'menu-addon-example.component.html';
@@ -68,6 +68,15 @@ export class MenuDocsComponent {
             fileName: 'menu-with-submenu-example',
             typescriptFileCode: menuWithSubmenuTs,
             component: 'MenuWithSubmenuExampleComponent'
+        }
+    ];
+
+    extendedMenu: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets('extended-menu-example.component.ts'),
+            fileName: 'extended-menu-example.component',
+            component: 'ExtendedMenuExampleComponent'
         }
     ];
 }
