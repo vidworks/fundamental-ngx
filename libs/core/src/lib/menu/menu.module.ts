@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MenuComponent } from './menu.component';
 import { MenuTitleDirective } from './directives/menu-title.directive';
-import { MenuInteractiveComponent } from './directives/menu-interactive.component';
+import { MenuInteractiveComponent } from './menu-interactive.component';
 import { MenuSeparatorDirective } from './menu-separator.directive';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
@@ -18,6 +18,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { ToggleButtonDirective } from './directives/toggle-button.directive';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
+import { MenuItemInputDirective } from './directives/menu-item-input.directive';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { SegmentedButtonOptionDirective } from './directives/segmented-button/se
         DeprecatedMenuCompactDirective,
         ToggleButtonDirective,
         SegmentedButtonHeaderDirective,
-        SegmentedButtonOptionDirective
+        SegmentedButtonOptionDirective,
+        MenuItemInputDirective
     ],
     exports: [
         MenuComponent,
@@ -56,7 +58,8 @@ import { SegmentedButtonOptionDirective } from './directives/segmented-button/se
         GlyphMenuAddonDirective,
         ToggleButtonDirective,
         SegmentedButtonHeaderDirective,
-        SegmentedButtonOptionDirective
+        SegmentedButtonOptionDirective,
+        MenuItemInputDirective
     ],
     providers: [DynamicComponentService]
 })
