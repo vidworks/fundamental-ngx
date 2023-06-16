@@ -80,9 +80,9 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                         tap((IconComponent) => {
                             const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
                             componentRef.instance.glyph = glyphName;
-                            componentRef.instance.elementRef().nativeElement.setAttribute('role', 'presentation');
+                            componentRef.instance.elementRef.nativeElement.setAttribute('role', 'presentation');
                             if (this.isInToggleButton) {
-                                componentRef.instance.elementRef().nativeElement.classList.add('fd-menu__checkmark');
+                                componentRef.instance.elementRef.nativeElement.classList.add('fd-menu__checkmark');
                             }
                             componentRef.changeDetectorRef.detectChanges();
                         })
