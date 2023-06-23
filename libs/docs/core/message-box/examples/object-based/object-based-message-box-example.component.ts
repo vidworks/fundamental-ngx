@@ -33,13 +33,13 @@ export class ObjectBasedMessageBoxExampleComponent {
             ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body'
         });
 
-        messageBoxRef.afterClosed.subscribe(
-            (result) => {
+        messageBoxRef.afterClosed.subscribe({
+            next: (result) => {
                 this.closeReason = 'Message box closed with result: ' + result;
             },
-            (error) => {
+            error: (error) => {
                 this.closeReason = 'Message box dismissed with result: ' + error;
             }
-        );
+        });
     }
 }
