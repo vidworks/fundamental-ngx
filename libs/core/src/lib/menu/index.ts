@@ -4,6 +4,8 @@ export * from './directives/menu-addon.directive';
 export * from './directives/menu-title.directive';
 export * from './menu-interactive.component';
 export * from './directives/deprecated-menu-compact.directive';
+export * from './directives/segmented-button/segmented-button-header.directive';
+export * from './directives/segmented-button/segmented-button-option.directive';
 export * from './directives/glyph-menu-addon.directive';
 export * from './directives/toggle-button.directive';
 
