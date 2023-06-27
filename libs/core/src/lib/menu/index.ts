@@ -2,10 +2,12 @@ export * from './directives/menu-shortcut.directive';
 export * from './directives/menu-trigger.directive';
 export * from './directives/menu-addon.directive';
 export * from './directives/menu-title.directive';
-export * from './directives/menu-interactive.directive';
+export * from './menu-interactive.component';
 export * from './directives/deprecated-menu-compact.directive';
+export * from './directives/glyph-menu-addon.directive';
+export * from './directives/toggle-button.directive';
 
-export * from './menu-separator/menu-separator.component';
+export * from './menu-separator.directive';
 export * from './menu-item/menu-item.component';
 
 export * from './menu.module';
