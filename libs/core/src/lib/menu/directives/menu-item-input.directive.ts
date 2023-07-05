@@ -10,6 +10,7 @@ import { Directive, HostListener } from '@angular/core';
 })
 export class MenuItemInputDirective {
     /**
+     * @hidden
      * This is needed to prevent the click event from bubbling up to the menu item
      * and potentially closing the menu or triggering other actions.
      */

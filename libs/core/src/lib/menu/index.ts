@@ -8,6 +8,7 @@ export * from './directives/segmented-button/segmented-button-header.directive';
 export * from './directives/segmented-button/segmented-button-option.directive';
 export * from './directives/glyph-menu-addon.directive';
 export * from './directives/toggle-button.directive';
+export * from './directives/menu-item-input.directive';
 
 export * from './menu-separator.directive';
 export * from './menu-item/menu-item.component';
