@@ -23,7 +23,8 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
-    avatarGroup: [
+    avatarGroup: ['AvatarGroupComponent'],
+    legacyAvatarGroup: [
         'AvatarGroupComponent',
         'AvatarGroupItemDirective',
         'AvatarGroupFocusableAvatarDirective',
@@ -422,7 +423,5 @@ export const API_FILES = {
         'MultiComboboxSelectionChangeEvent',
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
-    ],
-    avatarGroup: ['AvatarGroupComponent'],
-    avatarGroup: ['AvatarGroupComponent']
+    ]
 };
