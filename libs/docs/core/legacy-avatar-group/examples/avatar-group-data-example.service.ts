@@ -28,7 +28,7 @@ const glyphs = [
     'calendar'
 ];
 
-interface PeopleExample {
+export interface PeopleExample {
     id: string;
     firstName: string;
     lastName: string;

@@ -422,5 +422,6 @@ export const API_FILES = {
         'MultiComboboxSelectionChangeEvent',
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
-    ]
+    ],
+    avatarGroup: ['AvatarGroupComponent']
 };
