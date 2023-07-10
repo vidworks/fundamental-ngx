@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
-import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
+import { AvatarGroupComponent } from '@fundamental-ngx/core/legacy-avatar-group';
 import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
