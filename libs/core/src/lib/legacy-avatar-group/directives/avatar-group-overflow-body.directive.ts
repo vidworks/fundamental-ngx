@@ -15,8 +15,6 @@ import { Subscription } from 'rxjs';
 import { HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef } from '../tokens';
 
-// import { AvatarGroupFocusableAvatarDirective } from './legacy-avatar-group-focusable-avatar.directive';
-
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-overflow-body]',
