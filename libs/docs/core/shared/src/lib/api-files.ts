@@ -423,5 +423,6 @@ export const API_FILES = {
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
     ],
+    avatarGroup: ['AvatarGroupComponent'],
     avatarGroup: ['AvatarGroupComponent']
 };
