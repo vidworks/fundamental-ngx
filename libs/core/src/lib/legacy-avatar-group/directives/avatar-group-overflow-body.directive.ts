@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 import { HasElementRef, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef } from '../tokens';
 
-// import { AvatarGroupFocusableAvatarDirective } from './avatar-group-focusable-avatar.directive';
+// import { AvatarGroupFocusableAvatarDirective } from './legacy-avatar-group-focusable-avatar.directive';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

@@ -34,9 +34,9 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/avatar').then((m) => m.AvatarDocsModule)
             },
             {
-                path: 'avatar-group',
+                path: 'legacy-avatar-group',
                 loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/avatar-group').then((m) => m.AvatarGroupDocsModule)
+                    import('@fundamental-ngx/docs/core/legacy-avatar-group').then((m) => m.AvatarGroupDocsModule)
             },
             {
                 path: 'bar',
