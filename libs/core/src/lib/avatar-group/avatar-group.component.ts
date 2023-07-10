@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     templateUrl: './avatar-group.component.html',
     styleUrls: ['./avatar-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class AvatarGroupComponent {}

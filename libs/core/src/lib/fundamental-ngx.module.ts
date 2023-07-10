@@ -34,7 +34,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { NotificationModule } from '@fundamental-ngx/core/notification';
 import { AlertModule } from '@fundamental-ngx/core/alert';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { AvatarGroupModule } from '@fundamental-ngx/core/legacy-avatar-group';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { CardModule } from '@fundamental-ngx/core/card';
