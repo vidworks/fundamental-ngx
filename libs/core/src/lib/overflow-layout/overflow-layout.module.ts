@@ -13,8 +13,11 @@ import { OverflowLayoutItemContainerDirective } from './directives/overflow-layo
 import { OverflowLayoutFocusableItemDirective } from './directives/overflow-layout-focusable-item.directive';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, ButtonModule, I18nModule],
-    exports: [
+    imports: [
+        CommonModule,
+        PopoverModule,
+        ButtonModule,
+        I18nModule,
         OverflowLayoutComponent,
         OverflowItemRefDirective,
         OverflowExpandDirective,
@@ -24,7 +27,7 @@ import { OverflowLayoutFocusableItemDirective } from './directives/overflow-layo
         OverflowLayoutItemContainerDirective,
         OverflowLayoutFocusableItemDirective
     ],
-    declarations: [
+    exports: [
         OverflowLayoutComponent,
         OverflowItemRefDirective,
         OverflowExpandDirective,
