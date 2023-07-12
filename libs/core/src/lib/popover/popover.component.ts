@@ -8,6 +8,7 @@ import {
     ContentChild,
     ElementRef,
     HostListener,
+    inject,
     Injector,
     Input,
     OnChanges,
@@ -24,7 +25,7 @@ import {
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, HasElementRef, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import equal from 'fast-deep-equal';
@@ -37,6 +38,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
+import { NgIf } from '@angular/common';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -66,11 +68,13 @@ let cdkPopoverUniqueId = 0;
         class: 'fd-popover-custom',
         '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, CdkOverlayOrigin]
 })
 export class PopoverComponent
     extends BasePopoverClass
-    implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges
+    implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges, HasElementRef
 {
     /** Tooltip for popover */
     @Input()
@@ -136,6 +140,9 @@ export class PopoverComponent
     /** @hidden - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @deprecated
      * Left for backward compatibility

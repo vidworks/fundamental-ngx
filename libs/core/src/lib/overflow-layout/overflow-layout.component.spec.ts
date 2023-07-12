@@ -24,7 +24,9 @@ import { OverflowLayoutService } from './overflow-layout.service';
             </ng-container>
             <div *fdOverflowExpand></div>
         </fd-overflow-layout>
-    `
+    `,
+    standalone: true,
+    imports: [OverflowLayoutModule]
 })
 export class TestComponent {
     elementsWidth = 200;
@@ -52,8 +54,7 @@ describe('OverflowLayoutComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [OverflowLayoutModule],
-            declarations: [TestComponent]
+            imports: [OverflowLayoutModule, TestComponent]
         }).compileComponents();
     });
 

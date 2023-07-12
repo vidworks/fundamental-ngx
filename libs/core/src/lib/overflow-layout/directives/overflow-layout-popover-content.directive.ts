@@ -14,7 +14,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
  * Used to apply keyboard navigation through the items.
  */
 @Directive({
-    selector: '[fdOverflowLayoutPopoverContent]'
+    selector: '[fdOverflowLayoutPopoverContent]',
+    standalone: true
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent, OnDestroy {
     /**
