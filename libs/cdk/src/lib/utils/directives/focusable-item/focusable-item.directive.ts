@@ -4,7 +4,6 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { DestroyedService, TabbableElementService } from '../../services';
-import { HasElementRef } from '../../interfaces';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -15,6 +14,7 @@ import { FocusableObserver } from './focusable.observer';
 import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { Nullable } from '../../models/nullable';
 import { KeyUtil } from '../../functions';
+import { FocusableItem } from './focusable.item';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -49,7 +49,7 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
         DestroyedService
     ]
 })
-export class FocusableItemDirective implements HasElementRef {
+export class FocusableItemDirective implements FocusableItem {
     /** Whether the item is focusable. Default is true. */
     @Input()
     set fdkFocusableItem(val: BooleanInput) {
@@ -70,7 +70,7 @@ export class FocusableItemDirective implements HasElementRef {
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
     /** @hidden */
-    public readonly _keydown$ = new Subject<KeyboardEvent>();
+    public readonly keydown = new Subject<KeyboardEvent>();
 
     /** @hidden */
     _position: FocusableItemPosition;
@@ -92,7 +92,6 @@ export class FocusableItemDirective implements HasElementRef {
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
     }
-
     /** Element reference. */
     public readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
     /** @hidden */
@@ -105,8 +104,12 @@ export class FocusableItemDirective implements HasElementRef {
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     /** @hidden */
     protected readonly _zone = inject(NgZone);
+
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
+
+    /** @hidden */
+    element = (): HTMLElement => this.elementRef.nativeElement;
 
     /** @hidden */
     constructor() {
@@ -138,6 +141,16 @@ export class FocusableItemDirective implements HasElementRef {
                     this._onKeydown(event);
                 });
         });
+    }
+
+    /** @hidden */
+    isFocusable(): boolean {
+        return this._focusable;
+    }
+
+    /** @hidden */
+    focus(): void {
+        this.elementRef.nativeElement.focus();
     }
 
     /** Set tabbable state */
@@ -215,7 +228,7 @@ export class FocusableItemDirective implements HasElementRef {
         }
 
         if (isFocused) {
-            this._keydown$.next(event);
+            this.keydown.next(event);
         }
     }
 

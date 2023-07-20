@@ -138,7 +138,7 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     /** @hidden */
     private _updateCells(): void {
         this._ngZone.onStable.pipe(first()).subscribe(() => {
-            this._cells?.forEach((cell) => (cell.focusable = cell.focusable || this.allCellsFocusable));
+            this._cells?.forEach((cell) => (cell.isFocusable = cell.isFocusable || this.allCellsFocusable));
         });
     }
 }
