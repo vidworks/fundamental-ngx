@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, OnChanges, OnInit } from '@angular/core';
 import {
     ColorAccent,
-    DestroyedService,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItemDirective,
     Nullable,
@@ -29,8 +28,7 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: forwardRef(() => AvatarGroupOverflowButtonComponent)
-        },
-        DestroyedService
+        }
     ]
 })
 export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective implements OnChanges, OnInit {

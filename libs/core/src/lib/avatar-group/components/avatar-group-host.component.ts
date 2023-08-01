@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     inject,
     Input,
@@ -12,11 +13,12 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { BehaviorSubject, combineLatest, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
-import { DestroyedService, HasElementRef, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { BehaviorSubject, combineLatest, map, Observable, startWith, Subject } from 'rxjs';
+import { HasElementRef, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupHostConfig } from '../types';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-avatar-group-host',
@@ -35,7 +37,6 @@ import { AvatarGroupHostConfig } from '../types';
     template: '<ng-content></ng-content>',
     standalone: true,
     imports: [NgIf],
-    providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarGroupHostComponent
@@ -78,7 +79,7 @@ export class AvatarGroupHostComponent
     private resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _onChanges$ = new Subject<SimpleChanges>();
@@ -105,7 +106,7 @@ export class AvatarGroupHostComponent
         ])
             .pipe(
                 map(([containerWidth, items]) => this.calculateVisibility(containerWidth, items)),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(({ hiddenItems, visibleItems }) => {
                 visibleItems.forEach((item) => item.show());
