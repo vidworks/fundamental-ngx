@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ContentChildren,
-    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
@@ -19,6 +18,7 @@ import {
 } from '@angular/core';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItemDirective, FocusableItemPosition } from '../focusable-item/focusable-item.directive';
+import { DestroyedService } from '../../services/destroyed.service';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -29,13 +29,12 @@ import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
 import { merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
 import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { destroyObservable, getNativeElement } from '../../helpers';
+import { getNativeElement } from '../../helpers';
 import { HasElementRef } from '../../interfaces';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { intersectionObservable, KeyUtil } from '../../functions';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { scrollIntoView, ScrollPosition } from './scroll';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface FocusableListPosition {
     rowIndex: number;
@@ -83,7 +82,8 @@ export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: FocusableListDirective
-        }
+        },
+        DestroyedService
     ]
 })
 export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestroy {
@@ -97,6 +97,9 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     get focusable(): boolean {
         return this._focusable;
     }
+
+    /** @hidden */
+    protected _focusable = false;
 
     /** Direction of navigation. Should be set to 'grid' when list is a part of grid. */
     @Input()
@@ -122,7 +125,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
+    public readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
 
     /** @hidden */
     get _focusableItems(): QueryList<FocusableItemDirective> {
@@ -133,21 +136,13 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     _items: QueryList<FocusableItemDirective> | undefined;
 
     /** @hidden */
-    readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
+    public readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
 
     /** @hidden */
-    readonly _gridListFocused$ = new Subject<FocusableListPosition>();
+    public readonly _gridListFocused$ = new Subject<FocusableListPosition>();
 
     /** @hidden */
-    readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
-    /** @hidden */
-    _isVisible = false;
-
-    /** @hidden */
-    protected _focusable = false;
-
-    /** @hidden */
-    protected readonly _destroyRef = inject(DestroyRef);
+    public readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
 
     /** @hidden */
     private _gridPosition: { rowIndex: number; totalRows: number };
@@ -160,17 +155,20 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     private readonly _refreshItems$ = new Subject<void>();
+
     /** @hidden */
     private readonly _refresh$ = new Subject<void>();
+
     /** @hidden */
     private readonly _renderer = inject(Renderer2);
+    /** @hidden */
+    protected readonly _destroy$ = inject(DestroyedService);
     /** @hidden */
     private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
     /** @hidden */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     /** @hidden */
     private readonly _focusableObserver = inject(FocusableObserver);
-
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
 
@@ -181,19 +179,83 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** @hidden */
+    _isVisible = false;
+
+    /** @hidden */
     constructor() {
         intersectionObservable(this._elementRef.nativeElement, { threshold: 0.25 })
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntil(this._destroy$))
             .subscribe((isVisible) => (this._isVisible = isVisible[0]?.isIntersecting));
 
         this._focusableObserver
             .observe(this._elementRef, false)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntil(this._destroy$))
             .subscribe((isFocusable) => {
                 if (!isFocusable && isFocusable !== this.focusable) {
                     this.focusable = isFocusable;
                 }
             });
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!this._keyManager) {
+            return;
+        }
+
+        if (changes['wrap']) {
+            this._keyManager = this._keyManager.withWrap(changes['wrap'].currentValue);
+        }
+
+        if (changes['navigationDirection']) {
+            this._updateNavigationDirection();
+        }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenOnItems();
+    }
+
+    /** Set items programmatically. */
+    setItems(items: QueryList<FocusableItemDirective>): void {
+        this._items = items;
+        this._listenOnItems();
+    }
+
+    /** @hidden */
+    private _listenOnItems(): void {
+        const refresh$ = merge(this._refresh$, this._destroy$);
+        this._refresh$.next();
+        this._focusableItems.changes
+            .pipe(
+                startWith(null),
+                map(() => this._focusableItems.toArray()),
+                tap((items: FocusableItemDirective[]): void => {
+                    const focusableItems: FocusableItem[] = items.map((item, index) => ({
+                        index,
+                        focusable: () => item.fdkFocusableItem,
+                        elementRef: item.elementRef,
+                        focus: () => item.elementRef.nativeElement.focus(),
+                        keydown: item._keydown$
+                    }));
+
+                    const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
+
+                    this._initializeFocusManager(focusableItems, this, {
+                        direction,
+                        contentDirection: this.contentDirection,
+                        wrap: this.wrap
+                    });
+                }),
+                takeUntil(refresh$)
+            )
+            .subscribe();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._keyManager?.destroy();
     }
 
     /** @hidden */
@@ -224,50 +286,6 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         }
 
         this._keydown$.next({ list: this, event, activeItemIndex: this._keyManager?.activeItemIndex ?? null });
-    }
-
-    /** @hidden */
-    @HostListener('focus')
-    async _onFocus(): Promise<void> {
-        if (this._gridPosition) {
-            this._gridListFocused$.next(this._gridPosition);
-
-            this._liveAnnouncer.clear();
-            await this._liveAnnouncer.announce(this.listFocusedEventAnnouncer(this._gridPosition));
-
-            this.setTabbable(true);
-        }
-    }
-
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (!this._keyManager) {
-            return;
-        }
-
-        if (changes['wrap']) {
-            this._keyManager = this._keyManager.withWrap(changes['wrap'].currentValue);
-        }
-
-        if (changes['navigationDirection']) {
-            this._updateNavigationDirection();
-        }
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._listenOnItems();
-    }
-
-    /** Set items programmatically. */
-    setItems(items: QueryList<FocusableItemDirective>): void {
-        this._items = items;
-        this._listenOnItems();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._keyManager?.destroy();
     }
 
     /** Set active item in list */
@@ -303,6 +321,19 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** @hidden */
+    @HostListener('focus')
+    async _onFocus(): Promise<void> {
+        if (this._gridPosition) {
+            this._gridListFocused$.next(this._gridPosition);
+
+            this._liveAnnouncer.clear();
+            await this._liveAnnouncer.announce(this.listFocusedEventAnnouncer(this._gridPosition));
+
+            this.setTabbable(true);
+        }
+    }
+
+    /** @hidden */
     _updateNavigationDirection(): void {
         if (!this._keyManager) {
             return;
@@ -327,7 +358,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
         this._gridPosition = position;
 
         this._focusableItems.changes
-            .pipe(startWith(this._focusableItems), takeUntilDestroyed(this._destroyRef))
+            .pipe(startWith(this._focusableItems), takeUntil(this._destroy$))
             .subscribe((items) =>
                 items.forEach(
                     (item, index) =>
@@ -341,7 +372,11 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** @hidden */
-    private _initializeFocusManager(items: FocusableItem[], config: FocusableListConfig = {}): void {
+    private _initializeFocusManager(
+        items: FocusableItem[],
+        list: FocusableListDirective,
+        config: FocusableListConfig = {}
+    ): void {
         this._refreshItems$.next();
 
         let keyManager = new FocusKeyManager<any>(items).withHomeAndEnd();
@@ -388,38 +423,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
                     this._keyManager?.onKeydown(event);
                 }),
-                takeUntil(merge(this._refreshItems$, destroyObservable(this._destroyRef))),
+                takeUntil(merge(this._refreshItems$, this._destroy$)),
                 finalize(() => focusListenerDestroyers.forEach((d) => d()))
-            )
-            .subscribe();
-    }
-
-    /** @hidden */
-    private _listenOnItems(): void {
-        const refresh$ = merge(this._refresh$, destroyObservable(this._destroyRef));
-        this._refresh$.next();
-        this._focusableItems.changes
-            .pipe(
-                startWith(null),
-                map(() => this._focusableItems.toArray()),
-                tap((items: FocusableItemDirective[]): void => {
-                    const focusableItems: FocusableItem[] = items.map((item, index) => ({
-                        index,
-                        focusable: () => item.fdkFocusableItem,
-                        elementRef: item.elementRef,
-                        focus: () => item.elementRef.nativeElement.focus(),
-                        keydown: item._keydown$
-                    }));
-
-                    const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
-
-                    this._initializeFocusManager(focusableItems, {
-                        direction,
-                        contentDirection: this.contentDirection,
-                        wrap: this.wrap
-                    });
-                }),
-                takeUntil(refresh$)
             )
             .subscribe();
     }

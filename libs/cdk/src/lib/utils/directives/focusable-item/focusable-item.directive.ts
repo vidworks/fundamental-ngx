@@ -1,19 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import {
-    DestroyRef,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostBinding,
-    inject,
-    Input,
-    NgZone,
-    Output
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, inject, Input, NgZone, Output } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
-import { TabbableElementService } from '../../services';
+import { DestroyedService, TabbableElementService } from '../../services';
 import { HasElementRef } from '../../interfaces';
 import {
     DeprecatedSelector,
@@ -22,10 +12,9 @@ import {
 } from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 import { Nullable } from '../../models/nullable';
 import { KeyUtil } from '../../functions';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -56,7 +45,8 @@ export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: FocusableItemDirective
-        }
+        },
+        DestroyedService
     ]
 })
 export class FocusableItemDirective implements HasElementRef {
@@ -79,20 +69,11 @@ export class FocusableItemDirective implements HasElementRef {
     @Output()
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
-    /** Element reference. */
-    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
     /** @hidden */
-    readonly _keydown$ = new Subject<KeyboardEvent>();
+    public readonly _keydown$ = new Subject<KeyboardEvent>();
 
     /** @hidden */
     _position: FocusableItemPosition;
-
-    /** @hidden */
-    protected readonly _destroyRef = inject(DestroyRef);
-
-    /** @hidden */
-    protected readonly _zone = inject(NgZone);
 
     /** @hidden */
     private _focusable = true;
@@ -102,19 +83,28 @@ export class FocusableItemDirective implements HasElementRef {
 
     /** @hidden */
     private _tabbable = true;
+
     /** @hidden */
     private _timerId: ReturnType<typeof setTimeout> | null;
+
     /** @hidden */
     @HostBinding('attr.tabindex')
     get _tabindex(): number {
         return this._tabbable ? 0 : -1;
     }
+
+    /** Element reference. */
+    public readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
     /** @hidden */
     private readonly _focusableObserver = inject(FocusableObserver);
+    /** @hidden */
+    protected readonly _destroy$ = inject(DestroyedService);
     /** @hidden */
     private readonly _tabbableElementService = inject(TabbableElementService);
     /** @hidden */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
+    /** @hidden */
+    protected readonly _zone = inject(NgZone);
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
 
@@ -122,7 +112,7 @@ export class FocusableItemDirective implements HasElementRef {
     constructor() {
         this._focusableObserver
             .observe(this.elementRef, false)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntil(this._destroy$))
             .subscribe((isFocusable) => {
                 if (!isFocusable && isFocusable !== this.fdkFocusableItem) {
                     this.fdkFocusableItem = isFocusable;
@@ -131,19 +121,19 @@ export class FocusableItemDirective implements HasElementRef {
 
         this._zone.runOutsideAngular(() => {
             fromEvent(this.elementRef.nativeElement, 'focusin')
-                .pipe(takeUntilDestroyed())
+                .pipe(takeUntil(this._destroy$))
                 .subscribe(async () => {
                     await this._onFocusin();
                 });
 
             fromEvent(this.elementRef.nativeElement, 'focusout')
-                .pipe(takeUntilDestroyed())
+                .pipe(takeUntil(this._destroy$))
                 .subscribe(() => {
                     this._onFocusout();
                 });
 
             fromEvent<KeyboardEvent>(this.elementRef.nativeElement, 'keydown')
-                .pipe(takeUntilDestroyed())
+                .pipe(takeUntil(this._destroy$))
                 .subscribe((event) => {
                     this._onKeydown(event);
                 });
