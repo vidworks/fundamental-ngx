@@ -1,0 +1,52 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #swipeDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <span fd-title *ngIf="elementSelected" @inRTL>
+                <button fd-button glyph="arrow-left" fdType="transparent" (click)="returnToMain()"></button>
+            </span>
+            <h1 id="fd-dialog-header-10" fd-title>{{ dialogTitle }}</h1>
+        </fd-dialog-header>
+        <fd-dialog-body>
+            <div *ngIf="!elementSelected" class="content-container" @inRTL @outRTL>
+                <fd-tile class="tile-container" (click)="openNewElement()">
+                    <div fd-tile-content>
+                        <span class="content-text"> <br />Add New Element </span>
+                    </div>
+                </fd-tile>
+                <div *ngFor="let el of elementArr" style="display: inline-block">
+                    <fd-tile class="tile-container" (click)="openElement(el)">
+                        <div fd-tile-content>
+                            <span class="content-text"> <br />Element {{ el }} </span>
+                        </div>
+                    </fd-tile>
+                </div>
+            </div>
+            <div #Cont></div>
+        </fd-dialog-body>
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Confirm"
+                (click)="dialog.close('Continue')"
+                ariaLabel="Interested Emphasized"
+                *ngIf="!elementSelected"
+            >
+            </fd-button-bar>
+            <fd-button-bar
+                label="Cancel"
+                (click)="dialog.dismiss('Cancel')"
+                ariaLabel="Cancel"
+                *ngIf="!elementSelected"
+            ></fd-button-bar>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Confirm"
+                (click)="returnToMain()"
+                ariaLabel="Confirm"
+                *ngIf="elementSelected"
+            ></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open from Template" (click)="openDialog(swipeDialog)"></button>

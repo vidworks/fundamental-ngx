@@ -16,6 +16,8 @@ import {
     DialogInnerPopoverComponent,
     DialogInnerPopoverExampleComponent
 } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { TileModule } from '@fundamental-ngx/core/tile';
+import { DialogSwipeExampleComponent } from './examples/dialog-swipe/dialog-swipe-example.component';
 
 const routes: Routes = [
     {
@@ -38,7 +40,8 @@ const routes: Routes = [
         InputGroupModule,
         A11yModule,
         MultiInputModule,
-        CheckboxModule
+        CheckboxModule,
+        TileModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -46,7 +49,8 @@ const routes: Routes = [
         DialogDocsComponent,
         DialogDocsHeaderComponent,
         DialogInnerPopoverComponent,
-        DialogInnerPopoverExampleComponent
+        DialogInnerPopoverExampleComponent,
+        DialogSwipeExampleComponent
     ],
     providers: [DialogService, currentComponentProvider('dialog')]
 })
