@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
@@ -28,6 +29,7 @@ import {
 } from '@angular/core';
 
 import {
+    DndListDirective,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableGridDirective,
     KeyUtil,
@@ -105,7 +107,7 @@ import {
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components';
+import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -384,6 +386,12 @@ export class TableComponent<T = any>
     @Input()
     forceCheckedAllState = false;
 
+    /**
+     * aria-labelledby attribute value for the table.
+     */
+    @Input()
+    ariaLabelledBy: string;
+
     /** @hidden */
     private _shouldCheckNewRows = false;
 
@@ -459,6 +467,9 @@ export class TableComponent<T = any>
     @ViewChild('tableBody', { read: ElementRef })
     private readonly _tableBody: ElementRef<HTMLElement>;
     /** @hidden */
+    @ViewChild(DndListDirective)
+    private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
     /** @hidden */
@@ -466,7 +477,7 @@ export class TableComponent<T = any>
     readonly customEditableCells: QueryList<EditableTableCell>;
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
-    readonly tableToolbar: TableToolbarWithTemplate;
+    readonly tableToolbar: TableToolbarInterface;
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
@@ -527,6 +538,15 @@ export class TableComponent<T = any>
                 this._dndLoadingState)
         );
     }
+
+    /** @hidden */
+    get _ariaLabelledBy(): string | null {
+        if (this.ariaLabelledBy) {
+            return this.ariaLabelledBy;
+        }
+        return this.tableToolbar?.tableToolbarTitleId || null;
+    }
+
     /**
      * @hidden
      * Representation of combined table rows.
@@ -579,6 +599,8 @@ export class TableComponent<T = any>
      * Optimizes performance due to skipping initial setup of the component.
      */
     _tableRowsInViewPortPlaceholder: number[] = [];
+    /** @hidden */
+    _dndTableRowsPlaceholder: TableRow[] = [];
     /** @hidden */
     _isShownSelectionColumn = false;
     /** @hidden */
@@ -719,6 +741,7 @@ export class TableComponent<T = any>
      */
     setRowsInViewport(startIndex = 0, length: number): void {
         this._tableRowsInViewPortPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
+        this._dndTableRowsPlaceholder = this._tableRows.slice(startIndex, length);
         this._cdr.detectChanges();
     }
 
@@ -1194,6 +1217,16 @@ export class TableComponent<T = any>
         });
 
         return currentPreset;
+    }
+
+    /**
+     * Manually triggers list item event listeners for drag&drop list directive.
+     */
+    refreshDndList(): void {
+        if (this._virtualScrollDirective?.virtualScroll !== true) {
+            return;
+        }
+        this._dndDirective?.refreshQueryList();
     }
 
     /**
@@ -1750,6 +1783,7 @@ export class TableComponent<T = any>
                     tap(() => {
                         this._setSelectionColumnWidth();
                     }),
+                    filter(() => Array.from(ROW_HEIGHT.values()).includes(this.rowHeight)),
                     filter(() => !this._rowHeightManuallySet)
                 )
                 .subscribe((contentDensity) => {

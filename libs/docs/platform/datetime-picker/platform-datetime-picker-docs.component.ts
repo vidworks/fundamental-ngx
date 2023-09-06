@@ -9,11 +9,46 @@ const datetimePickerTemplateHtml = 'platform-datetime-picker-template-example.co
 const datetimePickerTemplateTs = 'platform-datetime-picker-template-example.component.ts';
 const datetimePickerUpdateOnBlurTs = 'platform-datetime-picker-update-on-blur-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+const datetimePickerMobileHtml = 'mobile/platform-datetime-picker-mobile-example.component.html';
+const datetimePickerMobileeTs = 'mobile/platform-datetime-picker-mobile-example.component.ts';
+
+import { RouterLink } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformDatetimePickerMobileExampleComponent } from './examples/mobile/platform-datetime-picker-mobile-example.component';
+import { PlatformDatetimePickerBasicExampleComponent } from './examples/platform-datetime-picker-basic-example.component';
+import { PlatformDatetimePickerDisableFunctionExampleComponent } from './examples/platform-datetime-picker-disable-function-example.component';
+import { PlatformDatetimePickerReactiveExampleComponent } from './examples/platform-datetime-picker-reactive-example.component';
+import { PlatformDatetimePickerTemplateExampleComponent } from './examples/platform-datetime-picker-template-example.component';
+import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/platform-datetime-picker-update-on-blur-example.component';
 
 @Component({
     selector: 'app-datetime-picker',
-    templateUrl: './platform-datetime-picker-docs.component.html'
+    templateUrl: './platform-datetime-picker-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformDatetimePickerBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformDatetimePickerReactiveExampleComponent,
+        PlatformDatetimePickerTemplateExampleComponent,
+        PlatformDatetimePickerDisableFunctionExampleComponent,
+        PlatformDatetimePickerUpdateOnBlurExampleComponent,
+        RouterLink,
+        FdDatetimeModule,
+        PlatformDatetimePickerMobileExampleComponent
+    ]
 })
 export class PlatformDatetimePickerDocsComponent {
     datetimePickerBasic: ExampleFile[] = [
@@ -78,6 +113,20 @@ export class PlatformDatetimePickerDocsComponent {
             code: getAssetFromModuleAssets(datetimePickerUpdateOnBlurTs),
             fileName: 'platform-datetime-picker-update-on-blur-example',
             component: 'PlatformDatetimePickerUpdateOnBlurExampleComponent'
+        }
+    ];
+
+    datetimePickerMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datetimePickerMobileHtml),
+            fileName: 'platform-datetime-PlatformDatetimePickerMobileExampleComponent-disable-function-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datetimePickerMobileeTs),
+            fileName: 'platform-datetime-picker-mobile-example',
+            component: 'PlatformDatetimePickerMobileExampleComponent'
         }
     ];
 }

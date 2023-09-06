@@ -37,6 +37,7 @@
             [allCellsFocusable]="true"
             [popIn]="_poppingColumns.length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
+            [attr.aria-labelledby]="_ariaLabelledBy"
         >
             <thead fd-table-header class="fdp-table__header">
                 <tr
@@ -67,7 +68,7 @@
                 [noBorderX]="noBorderX || noBorders"
                 [noBorderY]="noBorderY || noBorders"
                 [tabIndex]="pageScrolling ? 0 : -1"
-                [items]="_tableRows"
+                [items]="_dndTableRowsPlaceholder"
                 [draggable]="isDraggable"
                 [dropMode]="_dndTableDirective?.dropMode ?? 'group'"
                 (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"
@@ -135,7 +136,7 @@
                             <tr fd-table-row *fdkRepeat="3">
                                 <td fd-table-cell *fdkRepeat="_tableColumnsLength">
                                     <fd-skeleton
-                                        style="margin: auto 0"
+                                        [style.margin]="'auto 0'"
                                         type="text"
                                         textLines="1"
                                         width="60%"
@@ -170,10 +171,11 @@
             <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
 
             <!-- the tbody element below is so the scrollbar renders correctly -->
-            <tbody
-                *ngIf="_virtualScrollDirective?.virtualScroll"
-                [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"
-            ></tbody>
+            <tbody *ngIf="_virtualScrollDirective?.virtualScroll">
+                <tr>
+                    <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </ng-template>
@@ -183,7 +185,7 @@
     <tbody *ngIf="!_dataSourceDirective._firstLoadingDone" fd-table-body>
         <tr fd-table-row *fdkRepeat="3">
             <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+                <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
             </td>
         </tr>
     </tbody>

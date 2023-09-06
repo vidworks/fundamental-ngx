@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -8,7 +9,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Inject,
     Input,
     OnChanges,
@@ -22,46 +22,52 @@ import {
     SimpleChanges,
     SkipSelf,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewChildren,
+    forwardRef
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
-import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     Column,
     ColumnLayout,
+    FieldHintInput,
     FieldHintOptions,
     FormError,
-    PlatformFormFieldControl,
     FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
+    HintContent,
     LabelLayout,
+    PlatformFormField,
+    PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService,
-    PlatformFormField,
-    FieldHintInput,
-    HintContent
+    ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
-import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
-import { generateColumnClass, normalizeColumnLayout } from '../helpers';
-import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
+import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 import {
     FDP_FORM_FIELD_HINT_LAYOUT_CONFIG,
     FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT,
     HintLayoutConfig
 } from '../fdp-form.tokens';
+import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
+import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
+import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
-import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
 
 let defaultId = 0;
 
@@ -87,7 +93,21 @@ const formGroupChildProvider: Provider = {
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService]
+    providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
+    standalone: true,
+    imports: [
+        FormItemComponent,
+        NgIf,
+        NgTemplateOutlet,
+        InputMessageGroupWithTemplate,
+        NgFor,
+        FormMessageComponent,
+        FormLabelComponent,
+        LinkComponent,
+        IconModule,
+        InlineHelpModule,
+        AsyncPipe
+    ]
 })
 export class FormFieldComponent
     implements PlatformFormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges
@@ -287,15 +307,23 @@ export class FormFieldComponent
     formFieldExtras?: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ContentChildren(FormFieldErrorDirective)
-    private _errorDirectiveQuery: QueryList<FormError>;
-
-    /** @hidden */
     @ViewChild('labelCol') labelCol?: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
     inputMessageGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('innerErrorRenderers')
+    innerErrorRenderers: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectiveQuery: QueryList<FormError>;
+
+    /** @hidden */
+    @ViewChildren(InputMessageGroupWithTemplate)
+    private readonly _inputMessageGroupCmp: QueryList<InputMessageGroupWithTemplate>;
 
     /** Combined Error directives from field itself and parent form container. */
     get errorDirectives(): FormError[] {
@@ -589,6 +617,7 @@ export class FormFieldComponent
         });
         this._updateControlProperties();
         this._validateErrorHandler();
+        this._listenToFormMessage();
         this._cd.detectChanges();
     }
 
@@ -752,6 +781,25 @@ export class FormFieldComponent
      */
     isStringHint(hintOptions: HintContent): hintOptions is string {
         return typeof hintOptions === 'string';
+    }
+
+    /**
+     * @hidden
+     * Listens to form message component changes and passes its instance to the form control component.
+     */
+    private _listenToFormMessage(): void {
+        this._inputMessageGroupCmp.changes
+            .pipe(
+                startWith(null),
+                map(() => this._inputMessageGroupCmp.first),
+                takeUntil(this._destroyed$)
+            )
+            .subscribe((component) => {
+                if (!this.control) {
+                    return;
+                }
+                this.control!.formMessage = component;
+            });
     }
 
     /** @hidden */

@@ -17,11 +17,16 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import {
+    CheckboxComponent as CoreCheckboxComponent,
+    CheckboxComponent as FdCheckboxComponent,
+    FdCheckboxValues
+} from '@fundamental-ngx/core/checkbox';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
+import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -41,7 +46,9 @@ let nextUniqueId = 0;
     templateUrl: './checkbox.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }],
+    standalone: true,
+    imports: [FormItemComponent, CoreCheckboxComponent, FormsModule]
 })
 export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /**
@@ -83,6 +90,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /** Whether checkbox should be rendered standalone (without any text). */
     @Input()
     standalone = false;
+
+    /** Whether the checkbox should be rendered in display-only mode. */
+    @Input()
+    displayOnly = false;
 
     /**
      * Emitting checked event for non-form checkbox

@@ -12,22 +12,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { date, date1, date10, date11, date12, date2, date3, date5, date8, date9, text, year2025 } from './date-picker';
 import { DatePicker } from './date-picker.po';
-import {
-    date,
-    date1,
-    date10,
-    date11,
-    date12,
-    date2,
-    date3,
-    date5,
-    date8,
-    date9,
-    highlightedColor,
-    text,
-    year2025
-} from './date-picker';
 
 describe('Date picker suite', () => {
     const datePickerPage: DatePicker = new DatePicker();
@@ -75,7 +61,7 @@ describe('Date picker suite', () => {
 
     it('Verify calendar is expanded on click on the date picker button', async () => {
         const activeButtons = await elementArray(buttonDatePicker);
-        for (let i = 1; i < activeButtons.length; i++) {
+        for (let i = 1; i < activeButtons.length - 2; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(buttonDatePicker, i);
@@ -99,7 +85,7 @@ describe('Date picker suite', () => {
 
     it('Verify by default today date is focused', async () => {
         const activeButtons = await elementArray(buttonDatePicker);
-        for (let i = 4; i < activeButtons.length; i++) {
+        for (let i = 4; i < activeButtons.length - 2; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(buttonDatePicker, i);

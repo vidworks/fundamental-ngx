@@ -3,6 +3,279 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.25) (2023-09-06)
+
+
+### Bug Fixes
+
+* **core:** fixed issue with styling encapsulation ([#10390](https://github.com/SAP/fundamental-ngx/issues/10390)) ([f2bddcf](https://github.com/SAP/fundamental-ngx/commit/f2bddcfdcdd0dd11175595ad6764b2acc80e91b8))
+
+
+### Features
+
+* **core:** added template based popover body ([#10455](https://github.com/SAP/fundamental-ngx/issues/10455)) ([23f16b5](https://github.com/SAP/fundamental-ngx/commit/23f16b55fd33ed2062a0c9966b8510fb057ba2c1))
+* **core:** form sublibrary standalone migration ([#10481](https://github.com/SAP/fundamental-ngx/issues/10481)) ([ca21e5b](https://github.com/SAP/fundamental-ngx/commit/ca21e5b45b63effeb3bc58b556598e2d1a493492))
+
+
+
+
+
+# [0.46.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.24) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** fixed issue with styling encapsulation ([#10390](https://github.com/SAP/fundamental-ngx/issues/10390)) ([f2bddcf](https://github.com/SAP/fundamental-ngx/commit/f2bddcfdcdd0dd11175595ad6764b2acc80e91b8))
+
+
+### Features
+
+* **core:** added template based popover body ([#10455](https://github.com/SAP/fundamental-ngx/issues/10455)) ([23f16b5](https://github.com/SAP/fundamental-ngx/commit/23f16b55fd33ed2062a0c9966b8510fb057ba2c1))
+
+
+
+
+
+# [0.46.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.22...v0.46.0-rc.23) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.22) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** add aria-multiselectable to multi input options list ([#10449](https://github.com/SAP/fundamental-ngx/issues/10449)) ([a06a6f3](https://github.com/SAP/fundamental-ngx/commit/a06a6f30e831a71f8d9d8371534b6f8fd570cabd))
+* **core:** default element style breaking standalone tokens ([#10416](https://github.com/SAP/fundamental-ngx/issues/10416)) ([d447fb8](https://github.com/SAP/fundamental-ngx/commit/d447fb83c947931b5b7e0bf001708ac5e166828a))
+
+
+
+
+
+# [0.46.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.21) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** default element style breaking standalone tokens ([#10416](https://github.com/SAP/fundamental-ngx/issues/10416)) ([d447fb8](https://github.com/SAP/fundamental-ngx/commit/d447fb83c947931b5b7e0bf001708ac5e166828a))
+
+
+
+
+
+# [0.46.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.19...v0.46.0-rc.20) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** checkbox label container gap issue ([#10418](https://github.com/SAP/fundamental-ngx/issues/10418)) ([ed6cdc3](https://github.com/SAP/fundamental-ngx/commit/ed6cdc31623c984cc945aba8c2d38cca6a4aacf8))
+
+
+
+
+
+# [0.46.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.18...v0.46.0-rc.19) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.17...v0.46.0-rc.18) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** move button type to aria-description [#10292](https://github.com/SAP/fundamental-ngx/issues/10292) ([#10461](https://github.com/SAP/fundamental-ngx/issues/10461)) ([b3bae46](https://github.com/SAP/fundamental-ngx/commit/b3bae466834272962769ecbb699ebf000c8f9aed))
+
+
+
+
+
+# [0.46.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.16...v0.46.0-rc.17) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.15...v0.46.0-rc.16) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.14...v0.46.0-rc.15) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.13...v0.46.0-rc.14) (2023-09-04)
+
+
+### Features
+
+* **core:** introduce Generic Tag new component ([#10435](https://github.com/SAP/fundamental-ngx/issues/10435)) ([2238161](https://github.com/SAP/fundamental-ngx/commit/223816124378caab1bda8179a2fc1c97b986a921))
+* **docs:** examples standalone migration ([#10409](https://github.com/SAP/fundamental-ngx/issues/10409)) ([3eb7071](https://github.com/SAP/fundamental-ngx/commit/3eb7071d7f5a266d9ab7ee36a05bbf105af81413)), closes [#10458](https://github.com/SAP/fundamental-ngx/issues/10458)
+
+
+
+
+
+# [0.46.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.12...v0.46.0-rc.13) (2023-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.11...v0.46.0-rc.12) (2023-09-01)
+
+
+### Bug Fixes
+
+* **core:** dialog service dismiss all ([#10452](https://github.com/SAP/fundamental-ngx/issues/10452)) ([1b5bf6f](https://github.com/SAP/fundamental-ngx/commit/1b5bf6fc55ca05974b48f45df8694857e214e36c))
+
+
+
+
+
+# [0.46.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.10...v0.46.0-rc.11) (2023-08-31)
+
+
+### Features
+
+* **core:** removed addon button on mobile mode in multi-input ([#10443](https://github.com/SAP/fundamental-ngx/issues/10443)) ([9e6b944](https://github.com/SAP/fundamental-ngx/commit/9e6b9447cd4c703ece309f04f6d75d0dad98e997))
+
+
+
+
+
+# [0.46.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.9...v0.46.0-rc.10) (2023-08-31)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.8...v0.46.0-rc.9) (2023-08-31)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.7...v0.46.0-rc.8) (2023-08-29)
+
+
+### Bug Fixes
+
+* **platform:** form generator dropdown messages ([#10395](https://github.com/SAP/fundamental-ngx/issues/10395)) ([8cdb72e](https://github.com/SAP/fundamental-ngx/commit/8cdb72e619df3498676f4180b2f1055301db9cd1))
+
+
+
+
+
+# [0.46.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.6...v0.46.0-rc.7) (2023-08-28)
+
+
+### Bug Fixes
+
+* **core:** datepicker outer focustrap ([#10396](https://github.com/SAP/fundamental-ngx/issues/10396)) ([ee7d631](https://github.com/SAP/fundamental-ngx/commit/ee7d6317c8434160fe30e3d51584f85287554ccb))
+
+
+
+
+
+# [0.46.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.5...v0.46.0-rc.6) (2023-08-23)
+
+
+### Bug Fixes
+
+* aria-labels ([#10380](https://github.com/SAP/fundamental-ngx/issues/10380)) ([b0a7e2e](https://github.com/SAP/fundamental-ngx/commit/b0a7e2e1edd118fea06dd011e75cf1d2110c4ba7))
+
+
+
+
+
+# [0.46.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.4...v0.46.0-rc.5) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.3...v0.46.0-rc.4) (2023-08-22)
+
+
+### Bug Fixes
+
+* **core,platform:** fix csp style-src ([#10376](https://github.com/SAP/fundamental-ngx/issues/10376)) ([6eba063](https://github.com/SAP/fundamental-ngx/commit/6eba063937da9b560e2413f53143bfec660eb60b))
+
+
+
+
+
+# [0.46.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.2...v0.46.0-rc.3) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.1...v0.46.0-rc.2) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.0...v0.46.0-rc.1) (2023-08-22)
+
+
+### Features
+
+* **core,platform:** calendar horizon, datepicker mobile mode ([#10373](https://github.com/SAP/fundamental-ngx/issues/10373)) ([dabd4dd](https://github.com/SAP/fundamental-ngx/commit/dabd4ddbd2cf70de7b4f9dec578566d8e7d8b41d))
+
+
+
+
+
+# [0.46.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.1...v0.46.0-rc.0) (2023-08-22)
+
+
+### Features
+
+* **core,platform,cx:** horizon 2023 update ([#10276](https://github.com/SAP/fundamental-ngx/issues/10276)) ([dfab60d](https://github.com/SAP/fundamental-ngx/commit/dfab60d4c8810d3ec25d797cfc75649d34bdc11a)), closes [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#9992](https://github.com/SAP/fundamental-ngx/issues/9992) [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#10067](https://github.com/SAP/fundamental-ngx/issues/10067) [#10091](https://github.com/SAP/fundamental-ngx/issues/10091) [#10066](https://github.com/SAP/fundamental-ngx/issues/10066) [#10125](https://github.com/SAP/fundamental-ngx/issues/10125) [#10275](https://github.com/SAP/fundamental-ngx/issues/10275) [#10274](https://github.com/SAP/fundamental-ngx/issues/10274) [#10315](https://github.com/SAP/fundamental-ngx/issues/10315) [#10314](https://github.com/SAP/fundamental-ngx/issues/10314) [#10317](https://github.com/SAP/fundamental-ngx/issues/10317)
+
+
+### BREAKING CHANGES
+
+* **core,platform,cx:** Vertical carousel markup change: Previously navigation buttons had icons `sap-icon--slim-arrow-left` and `sap-icon--slim-arrow-left` ignoring the direction. Now if vertical navigation is applied, buttons will have icons `sap-icon--slim-arrow-up` and `sap-icon--slim-arrow-down` respectively.
+Toolbar markup change: Removed inner `<div class="fd-toolbar">...</div>`. Now classes and other attributes applied to the root `fd-toolbar` element.
+Radio button: Projected content now wrapped with `<span class="fd-radio__text">`
+
+
+
+
+
 ## [0.45.1](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.11...v0.45.1) (2023-08-21)
 
 **Note:** Version bump only for package @fundamental-ngx/core

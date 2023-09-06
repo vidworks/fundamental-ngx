@@ -3,6 +3,267 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.25) (2023-09-06)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10476](https://github.com/SAP/fundamental-ngx/issues/10476)) ([010e001](https://github.com/SAP/fundamental-ngx/commit/010e001652714a277df4cfc6a409f707500f641c))
+* **platform:** table header cells without popovers should have aria-haspopup false ([#10448](https://github.com/SAP/fundamental-ngx/issues/10448)) ([e1e0251](https://github.com/SAP/fundamental-ngx/commit/e1e0251864072a86b8a453a6f70415f0f9964dfa))
+
+
+### Features
+
+* **core:** form sublibrary standalone migration ([#10481](https://github.com/SAP/fundamental-ngx/issues/10481)) ([ca21e5b](https://github.com/SAP/fundamental-ngx/commit/ca21e5b45b63effeb3bc58b556598e2d1a493492))
+
+
+
+
+
+# [0.46.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.24) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10476](https://github.com/SAP/fundamental-ngx/issues/10476)) ([010e001](https://github.com/SAP/fundamental-ngx/commit/010e001652714a277df4cfc6a409f707500f641c))
+* **platform:** table header cells without popovers should have aria-haspopup false ([#10448](https://github.com/SAP/fundamental-ngx/issues/10448)) ([e1e0251](https://github.com/SAP/fundamental-ngx/commit/e1e0251864072a86b8a453a6f70415f0f9964dfa))
+
+
+
+
+
+# [0.46.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.22...v0.46.0-rc.23) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.22) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** issues with toolbar in p13 dialog ([#10420](https://github.com/SAP/fundamental-ngx/issues/10420)) ([cc37fc0](https://github.com/SAP/fundamental-ngx/commit/cc37fc00e03a82fd5be363d19f7d813367fec1a6))
+
+
+
+
+
+# [0.46.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.21) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** issues with toolbar in p13 dialog ([#10420](https://github.com/SAP/fundamental-ngx/issues/10420)) ([cc37fc0](https://github.com/SAP/fundamental-ngx/commit/cc37fc00e03a82fd5be363d19f7d813367fec1a6))
+
+
+
+
+
+# [0.46.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.19...v0.46.0-rc.20) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.18...v0.46.0-rc.19) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** search field a11y fixes ([#10451](https://github.com/SAP/fundamental-ngx/issues/10451)) ([bb9f6b8](https://github.com/SAP/fundamental-ngx/commit/bb9f6b84b5bf927006f41c925c48c9aa1a321276))
+
+
+
+
+
+# [0.46.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.17...v0.46.0-rc.18) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.16...v0.46.0-rc.17) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.15...v0.46.0-rc.16) (2023-09-05)
+
+
+### Features
+
+* **platform:** added aria-labelledby to the table ([#10446](https://github.com/SAP/fundamental-ngx/issues/10446)) ([73ee20f](https://github.com/SAP/fundamental-ngx/commit/73ee20f6f22c8782c08003d50707ecb4ca4e683c))
+
+
+
+
+
+# [0.46.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.14...v0.46.0-rc.15) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.13...v0.46.0-rc.14) (2023-09-04)
+
+
+### Features
+
+* **docs:** examples standalone migration ([#10409](https://github.com/SAP/fundamental-ngx/issues/10409)) ([3eb7071](https://github.com/SAP/fundamental-ngx/commit/3eb7071d7f5a266d9ab7ee36a05bbf105af81413)), closes [#10458](https://github.com/SAP/fundamental-ngx/issues/10458)
+
+
+
+
+
+# [0.46.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.12...v0.46.0-rc.13) (2023-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.11...v0.46.0-rc.12) (2023-09-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.10...v0.46.0-rc.11) (2023-08-31)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.9...v0.46.0-rc.10) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** cell height instead of tbody ([#10440](https://github.com/SAP/fundamental-ngx/issues/10440)) ([702c568](https://github.com/SAP/fundamental-ngx/commit/702c5689a03efc223ad23aa66ff2966b96511eb7))
+
+
+
+
+
+# [0.46.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.8...v0.46.0-rc.9) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** custom row height ([#10439](https://github.com/SAP/fundamental-ngx/issues/10439)) ([3302769](https://github.com/SAP/fundamental-ngx/commit/3302769aa8be647006287b75d46e41e97c66a0eb))
+
+
+
+
+
+# [0.46.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.7...v0.46.0-rc.8) (2023-08-29)
+
+
+### Bug Fixes
+
+* **platform:** form generator dropdown messages ([#10395](https://github.com/SAP/fundamental-ngx/issues/10395)) ([8cdb72e](https://github.com/SAP/fundamental-ngx/commit/8cdb72e619df3498676f4180b2f1055301db9cd1))
+
+
+
+
+
+# [0.46.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.6...v0.46.0-rc.7) (2023-08-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.5...v0.46.0-rc.6) (2023-08-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.4...v0.46.0-rc.5) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.3...v0.46.0-rc.4) (2023-08-22)
+
+
+### Bug Fixes
+
+* **core,platform:** fix csp style-src ([#10376](https://github.com/SAP/fundamental-ngx/issues/10376)) ([6eba063](https://github.com/SAP/fundamental-ngx/commit/6eba063937da9b560e2413f53143bfec660eb60b))
+
+
+
+
+
+# [0.46.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.2...v0.46.0-rc.3) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.1...v0.46.0-rc.2) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.0...v0.46.0-rc.1) (2023-08-22)
+
+
+### Features
+
+* **core,platform:** calendar horizon, datepicker mobile mode ([#10373](https://github.com/SAP/fundamental-ngx/issues/10373)) ([dabd4dd](https://github.com/SAP/fundamental-ngx/commit/dabd4ddbd2cf70de7b4f9dec578566d8e7d8b41d))
+
+
+
+
+
+# [0.46.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.1...v0.46.0-rc.0) (2023-08-22)
+
+
+### Features
+
+* **core,platform,cx:** horizon 2023 update ([#10276](https://github.com/SAP/fundamental-ngx/issues/10276)) ([dfab60d](https://github.com/SAP/fundamental-ngx/commit/dfab60d4c8810d3ec25d797cfc75649d34bdc11a)), closes [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#9992](https://github.com/SAP/fundamental-ngx/issues/9992) [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#10067](https://github.com/SAP/fundamental-ngx/issues/10067) [#10091](https://github.com/SAP/fundamental-ngx/issues/10091) [#10066](https://github.com/SAP/fundamental-ngx/issues/10066) [#10125](https://github.com/SAP/fundamental-ngx/issues/10125) [#10275](https://github.com/SAP/fundamental-ngx/issues/10275) [#10274](https://github.com/SAP/fundamental-ngx/issues/10274) [#10315](https://github.com/SAP/fundamental-ngx/issues/10315) [#10314](https://github.com/SAP/fundamental-ngx/issues/10314) [#10317](https://github.com/SAP/fundamental-ngx/issues/10317)
+
+
+### BREAKING CHANGES
+
+* **core,platform,cx:** Vertical carousel markup change: Previously navigation buttons had icons `sap-icon--slim-arrow-left` and `sap-icon--slim-arrow-left` ignoring the direction. Now if vertical navigation is applied, buttons will have icons `sap-icon--slim-arrow-up` and `sap-icon--slim-arrow-down` respectively.
+Toolbar markup change: Removed inner `<div class="fd-toolbar">...</div>`. Now classes and other attributes applied to the root `fd-toolbar` element.
+Radio button: Projected content now wrapped with `<span class="fd-radio__text">`
+
+
+
+
+
 ## [0.45.1](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.11...v0.45.1) (2023-08-21)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

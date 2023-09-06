@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import {
     FormattedFormStep,
     WizardGeneratorSummaryItem
@@ -9,7 +15,9 @@ import {
     selector: 'fdp-wizard-summary-section',
     templateUrl: './wizard-summary-section.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgFor, TitleComponent, LayoutGridModule, FormLabelComponent, PlatformLinkModule, FdTranslatePipe]
 })
 export class WizardSummarySectionComponent {
     /**

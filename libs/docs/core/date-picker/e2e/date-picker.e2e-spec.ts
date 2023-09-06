@@ -19,9 +19,9 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { DatePickerPo } from './date-picker.po';
-import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
 import { blockExamples } from './date-picker-contents';
+import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
+import { DatePickerPo } from './date-picker.po';
 
 // https://github.com/SAP/fundamental-ngx/issues/8837
 xdescribe('Date picker suite', () => {
@@ -446,7 +446,7 @@ xdescribe('Date picker suite', () => {
             await click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount - 1) {
-            await click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
+            await click(altCalendarItem + ':not(.fd-calendar__item--other)', currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${await getCurrentMonth(true)}/${await getNextDay(true)}/${currentYear

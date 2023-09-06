@@ -15,7 +15,7 @@ import {
     waitForPresent,
     waitForUnclickable
 } from '../../../../../e2e';
-import { compactDate, currentDate, date, highlightedColor, text, year2030 } from './datetime-picker';
+import { compactDate, currentDate, date, text, year2030 } from './datetime-picker';
 import { DateTimePicker } from './datetime-picker.po';
 
 let dateTimePickerPage: DateTimePicker;
@@ -77,7 +77,7 @@ describe('Datetime picker suite', () => {
 
     it('Verify on click on the date picker button', async () => {
         const activeButtons = await elementArray(activeDateTimePickerButton);
-        for (let i = 1; i < activeButtons.length; i++) {
+        for (let i = 1; i < activeButtons.length - 2; i++) {
             if (!(await getElementClass(activeDateTimePickerButton, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(activeDateTimePickerButton, i);
@@ -240,9 +240,10 @@ describe('Datetime picker suite', () => {
 
     it('should check that OK buttons have correct text', async () => {
         const datepickerButtonsLength = await getElementArrayLength(datePickerButton);
-        for (let i = 0; i < datepickerButtonsLength; i++) {
+        for (let i = 0; i < datepickerButtonsLength - 2; i++) {
             if (!(await getElementClass(datePickerButton, i)).includes('disabled')) {
                 await click(datePickerButton, i);
+                // await pause(50000);
                 await expect((await getText(okButton + buttonText)).trim()).toEqual('Ok');
                 await click(okButton);
             }

@@ -1,10 +1,8 @@
-import { StandardListPo } from './standard-list.po';
 import {
     browserIsFirefox,
     click,
     clickAndDragElement,
     doesItExist,
-    executeScriptBeforeTagAttr,
     getElementArrayLength,
     getElementClass,
     getElementLocation,
@@ -16,6 +14,7 @@ import {
     waitForElDisplayed,
     waitForNotDisplayed
 } from '../../../../../e2e';
+import { StandardListPo } from './standard-list.po';
 
 describe('Standard List test suite', () => {
     const standardListPage = new StandardListPo();
@@ -31,7 +30,6 @@ describe('Standard List test suite', () => {
         cozySingleSelectList,
         compactSingleSelectList,
         selectedItems,
-        keyboardSupportList,
         dragAndDropList,
         infiniteList,
         deleteButton,

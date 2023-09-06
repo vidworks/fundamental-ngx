@@ -1,3 +1,4 @@
+import { NgIf, formatNumber } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -13,15 +14,23 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { formatNumber } from '@angular/common';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { OnlyDigitsDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
+import { StepInputControlDirective } from '../step-input-control.directive';
+import { StepInputDecrementDirective } from '../step-input-decrement.directive';
+import { StepInputIncrementDirective } from '../step-input-increment.directive';
 import { StepInputConfig } from '../step-input.config';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /**
  * Fundamental number-step-input component
@@ -46,6 +55,18 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
         { provide: FD_FORM_FIELD_CONTROL, useExisting: NumberStepInputComponent, multi: true },
         { provide: StepInputComponent, useExisting: NumberStepInputComponent },
         contentDensityObserverProviders()
+    ],
+    standalone: true,
+    imports: [
+        FormInputMessageGroupComponent,
+        ButtonModule,
+        StepInputDecrementDirective,
+        StepInputControlDirective,
+        OnlyDigitsDirective,
+        StepInputIncrementDirective,
+        NgIf,
+        FormMessageComponent,
+        ContentDensityModule
     ]
 })
 export class NumberStepInputComponent extends StepInputComponent {

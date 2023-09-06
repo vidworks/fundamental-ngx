@@ -1,4 +1,3 @@
-import { ListBylinePo } from './list-byline.po';
 import {
     click,
     getAttributeByName,
@@ -9,10 +8,11 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ListBylinePo } from './list-byline.po';
 
 describe('List byline test suite', () => {
     const listBylinePage = new ListBylinePo();
-    const { selectionExample, buttonExample, button, checkbox, listItem, radioButton, radioButtonInput } =
+    const { selectionExample, buttonExample, button, checkbox, listItem, radioButtonLabel, radioButtonInput } =
         listBylinePage;
 
     beforeAll(async () => {
@@ -47,11 +47,14 @@ describe('List byline test suite', () => {
     });
 
     it('verify that radio buttons work correctly', async () => {
-        const radioButtonLength = await getElementArrayLength(selectionExample + radioButton);
-        for (let i = 0; i < radioButtonLength; i++) {
-            await scrollIntoView(selectionExample + radioButton, i);
-            await click(selectionExample + radioButton, i);
-            await expect(await getAttributeByName(radioButtonInput, 'aria-checked', i)).toBe('true');
+        const radioButtonLabels = await $$(`${selectionExample} ${radioButtonLabel}`);
+        const radioButtonInputs = await $$(`${selectionExample} ${radioButtonInput}`);
+        for (let i = 0; i < radioButtonLabels.length; i++) {
+            const label = radioButtonLabels[i];
+            await label.scrollIntoView();
+            await label.click();
+            const ariaChecked = await radioButtonInputs[i].getAttribute('aria-checked');
+            await expect(ariaChecked).toBe('true');
         }
     });
 
