@@ -265,9 +265,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     moreClicked(): void {
         this._suggestions = this.isGroup
             ? this._convertObjectsToGroupOptionItems(this._selectedSuggestions.map(({ value }) => value))
-            : this._suggestions.filter((value) =>
-                  this._selectedSuggestions.some((item) => equal(item.value, value.value))
-              );
+            : this._selectedSuggestions;
 
         this.showList(true);
         this.selectedShown$.next(true);
